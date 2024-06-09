@@ -13,18 +13,6 @@ namespace SortPack.Infrastructure.Primitive
         {
         }
 
-
-
-        public override IList<T> Sort<T>(IList<T> collection)
-        {
-            List<T> result = [.. collection];
-
-            SortInPlace(result);
-            return result;
-        }
-
-
-
         public override IList<T> SortInPlace<T>(IList<T> collection)
         {
             for (int i = 0; i < collection.Count - 1; i++)

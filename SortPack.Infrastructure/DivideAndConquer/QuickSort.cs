@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace SortPack.Infrastructure.DivideAndConquer
 {
-    public class QuickSort : SortAlgorithm
+    public class QuickSort : RecursiveSortAlgorithm
     {
         public QuickSort()
         {
@@ -13,12 +13,6 @@ namespace SortPack.Infrastructure.DivideAndConquer
         public QuickSort(IStatisticCounter statisticCounter) : base(statisticCounter)
         {
         }
-
-        public override IList<T> Sort<T>(IList<T> collection)
-        {
-            return Sort(collection, new Random());
-        }
-
         public IList<T> Sort<T>(IList<T> collection, Random random) where T : IComparable<T>
         {
             List<T> result = [.. collection];
@@ -77,20 +71,7 @@ namespace SortPack.Infrastructure.DivideAndConquer
             return collection;
         }
 
-        public IList<T> RecursiveSort<T>(IList<T> collection, CancellationToken? cancellationToken = null) where T : IComparable<T>
-        {
-            List<T> result = [.. collection];
-            RecursiveSortInPlace(result, cancellationToken);
-            return result;
-        }
-
-        public Task<IList<T>> RecursiveSortAsync<T>(IList<T> collection, CancellationToken? cancellationToken = null) where T : IComparable<T>
-        {
-            return Task.Run(() => RecursiveSort(collection, cancellationToken), cancellationToken ?? CancellationToken.None);
-        }
-
-
-        public IList<T> RecursiveSortInPlace<T>(IList<T> collection, CancellationToken? cancellationToken = null) where T : IComparable<T>
+        public override IList<T> RecursiveSortInPlace<T>(IList<T> collection, CancellationToken? cancellationToken = null)
         {
             if (collection.Count < 2)
             {
@@ -103,11 +84,6 @@ namespace SortPack.Infrastructure.DivideAndConquer
             RecursiveCall(collection, left, right, cancellationToken);
 
             return collection;
-        }
-
-        public Task<IList<T>> RecursiveSortInPlaceAsync<T>(IList<T> collection, CancellationToken? cancellationToken = null) where T : IComparable<T>
-        {
-            return Task.Run(() => RecursiveSortInPlace(collection, cancellationToken), cancellationToken ?? CancellationToken.None);
         }
 
         private void RecursiveCall<T>(IList<T> collection, int left, int right, CancellationToken? cancellationToken = null) where T : IComparable<T>

@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace SortPack.Infrastructure.Advanced
 {
-    public class HeapSort : SortAlgorithm
+    public class HeapSort : RecursiveSortAlgorithm
     {
         public HeapSort()
         {
@@ -12,12 +12,6 @@ namespace SortPack.Infrastructure.Advanced
 
         public HeapSort(IStatisticCounter statisticCounter) : base(statisticCounter)
         {
-        }
-
-        public override IList<T> Sort<T>(IList<T> collection)
-        {
-            List<T> result = [.. collection];
-            return SortInPlace(result);
         }
 
         public override IList<T> SortInPlace<T>(IList<T> collection)
@@ -38,14 +32,7 @@ namespace SortPack.Infrastructure.Advanced
             return collection;
         }
 
-        public IList<T> RecursiveSort<T>(IList<T> collection, CancellationToken? cancellationToken = null) where T : IComparable<T>
-        {
-            IList<T> result = [.. collection];
-            RecursiveSortInPlace(result, cancellationToken);
-            return result;
-        }
-
-        public IList<T> RecursiveSortInPlace<T>(IList<T> collection, CancellationToken? cancellationToken = null) where T : IComparable<T>
+        public override IList<T> RecursiveSortInPlace<T>(IList<T> collection, CancellationToken? cancellationToken = null)
         {
             int length = collection.Count;
 

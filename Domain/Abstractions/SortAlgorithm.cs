@@ -24,7 +24,11 @@ namespace SortPack.Domain.Abstractions
 
 
 
-        public abstract IList<T> Sort<T>(IList<T> collection) where T : IComparable<T>;
+        public IList<T> Sort<T>(IList<T> collection) where T : IComparable<T>
+        {
+            IList<T> result = [.. collection];
+            return SortInPlace(result);
+        }
 
         public Task<IList<T>> SortAsync<T>(IList<T> collection) where T : IComparable<T>
         {

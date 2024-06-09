@@ -114,5 +114,28 @@ namespace SortPack.Domain.Abstractions
         public IList<sbyte> SortInPlace(IList<sbyte> collection) => SortInPlace<sbyte>(collection);
 
         protected abstract IList<T> SortInPlace<T>(IList<T> collection) where T : unmanaged;
+
+        protected static int GetByteValue<T>(T value, int bytePosition) where T : unmanaged
+        {
+            ulong longValue = ConvertToUInt64(value);
+            int byteValue = (int)((longValue >> (bytePosition * 8)) & 0xFF);
+            return byteValue;
+        }
+
+        private static ulong ConvertToUInt64<T>(T value) where T : unmanaged
+        {
+            return value switch
+            {
+                byte b => b,
+                sbyte sb => unchecked((ulong)sb),
+                ushort us => us,
+                short s => unchecked((ulong)s),
+                uint ui => ui,
+                int i => unchecked((ulong)i),
+                ulong ul => ul,
+                long l => unchecked((ulong)l),
+                _ => throw new NotSupportedException()
+            };
+        }
     }
 }

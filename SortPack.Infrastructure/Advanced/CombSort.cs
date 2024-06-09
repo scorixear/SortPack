@@ -16,12 +16,6 @@ namespace SortPack.Infrastructure.Advanced
             _shrinkFactor = shrinkFactor;
         }
 
-        public override IList<T> Sort<T>(IList<T> collection)
-        {
-            List<T> result = [.. collection];
-            return SortInPlace(result);
-        }
-
         public override IList<T> SortInPlace<T>(IList<T> collection)
         {
             int length = collection.Count;

@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace SortPack.Infrastructure.DivideAndConquer
 {
-    public class MergeSort : SortAlgorithm
+    public class MergeSort : RecursiveSortAlgorithm
     {
         public MergeSort()
         {
@@ -13,14 +13,6 @@ namespace SortPack.Infrastructure.DivideAndConquer
         public MergeSort(IStatisticCounter statisticCounter) : base(statisticCounter)
         {
         }
-
-        public override IList<T> Sort<T>(IList<T> collection)
-        {
-            List<T> result = [.. collection];
-            return SortInPlace(result);
-        }
-
-
 
         public override IList<T> SortInPlace<T>(IList<T> collection)
         {
@@ -81,13 +73,7 @@ namespace SortPack.Infrastructure.DivideAndConquer
             return collection;
         }
 
-        public IList<T> RecursiveSort<T>(IList<T> collection, CancellationToken? cancellationToken = null) where T : IComparable<T>
-        {
-            List<T> result = [.. collection];
-            return RecursiveSortInPlace(result);
-        }
-
-        public IList<T> RecursiveSortInPlace<T>(IList<T> collection, CancellationToken? cancellationToken = null) where T : IComparable<T>
+        public override IList<T> RecursiveSortInPlace<T>(IList<T> collection, CancellationToken? cancellationToken = null)
         {
             if (collection.Count < 2)
             {

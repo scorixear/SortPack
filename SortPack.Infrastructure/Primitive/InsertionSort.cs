@@ -8,14 +8,6 @@ namespace SortPack.Infrastructure.Primitive
         public InsertionSort() { }
         public InsertionSort(IStatisticCounter statisticCounter) : base(statisticCounter) { }
 
-        public override IList<T> Sort<T>(IList<T> collection)
-        {
-            List<T> result = [.. collection];
-
-            SortInPlace(result);
-            return result;
-        }
-
         public override IList<T> SortInPlace<T>(IList<T> collection)
         {
             for (int i = 1; i < collection.Count; i++)

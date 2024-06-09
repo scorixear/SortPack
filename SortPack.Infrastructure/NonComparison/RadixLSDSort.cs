@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace SortPack.Infrastructure.NonComparison
 {
-    public class RadixLSDSort : NumberSortAlgorithm
+    public sealed class RadixLSDSort : NumberSortAlgorithm
     {
         public RadixLSDSort()
         {
@@ -52,28 +52,6 @@ namespace SortPack.Infrastructure.NonComparison
                 StatisticCounter?.IncrementWriteOperations((ulong)n);
             }
             return collection;
-        }
-        private static int GetByteValue<T>(T value, int bytePosition) where T : unmanaged
-        {
-            ulong longValue = ConvertToUInt64(value);
-            int byteValue = (int)((longValue >> (bytePosition * 8)) & 0xFF);
-            return byteValue;
-        }
-
-        private static ulong ConvertToUInt64<T>(T value) where T : unmanaged
-        {
-            return value switch
-            {
-                byte b => b,
-                sbyte sb => unchecked((ulong)sb),
-                ushort us => us,
-                short s => unchecked((ulong)s),
-                uint ui => ui,
-                int i => unchecked((ulong)i),
-                ulong ul => ul,
-                long l => unchecked((ulong)l),
-                _ => throw new NotSupportedException()
-            };
         }
     }
 }
