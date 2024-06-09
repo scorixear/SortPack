@@ -1,9 +1,9 @@
-﻿using SortPack.Domain;
+﻿using SortPack.Domain.Abstractions;
 using SortPack.Domain.Interfaces;
 
 namespace SortPack.Infrastructure.Advanced
 {
-    public class ShellSort : SortInPlaceAlgorithm
+    public class ShellSort : SortAlgorithm
     {
         private readonly double _shrinkFactor;
         public ShellSort(double shrinkFactor = 2.3)

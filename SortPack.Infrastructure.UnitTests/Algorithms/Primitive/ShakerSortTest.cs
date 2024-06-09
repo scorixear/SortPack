@@ -5,7 +5,7 @@ using SortPack.Infrastructure.Primitive;
 namespace SortPack.Infrastructure.UnitTests.Algorithms.Primitive
 {
     [TestFixture]
-    public class ShakerSortTest : SortInPlaceAlgorithmTestBase<ShakerSort>
+    public class ShakerSortTest : SortAlgorithmTestBase<ShakerSort>
     {
         [Test]
         public override void SortInPlace_Uneven_WhenCalled_SortsCollection()

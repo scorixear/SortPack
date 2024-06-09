@@ -3,7 +3,7 @@ using SortPack.Domain.Interfaces;
 
 namespace SortPack.Infrastructure.UnitTests
 {
-    public abstract class SortInPlaceAlgorithmTestBase<T> : SortInPlaceAlgorithmTestBaseNoSetup<T> where T : ISortInPlaceAlgorithm
+    public abstract class SortAlgorithmTestBase<T> : SortAlgorithmTestBaseNoSetup<T> where T : ISortAlgorithm
     {
         [SetUp]
         public void SetUp()

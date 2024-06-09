@@ -1,9 +1,9 @@
-﻿using SortPack.Domain;
+﻿using SortPack.Domain.Abstractions;
 using SortPack.Domain.Interfaces;
 
 namespace SortPack.Infrastructure.Primitive
 {
-    public class SelectionSort : SortInPlaceAlgorithm
+    public class SelectionSort : SortAlgorithm
     {
         public SelectionSort()
         {

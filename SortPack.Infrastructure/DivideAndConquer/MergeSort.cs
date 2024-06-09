@@ -1,10 +1,10 @@
-﻿using SortPack.Domain;
+﻿using SortPack.Domain.Abstractions;
 using SortPack.Domain.Interfaces;
 using System.Runtime.CompilerServices;
 
 namespace SortPack.Infrastructure.DivideAndConquer
 {
-    public class MergeSort : SortInPlaceAlgorithm
+    public class MergeSort : SortAlgorithm
     {
         public MergeSort()
         {

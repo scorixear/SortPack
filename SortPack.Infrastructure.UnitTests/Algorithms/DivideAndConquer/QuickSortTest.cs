@@ -6,7 +6,7 @@ using SortPack.Infrastructure.UnitTests.NUnit;
 namespace SortPack.Infrastructure.UnitTests.Algorithms.DivideAndConquer
 {
     [TestFixture]
-    public class QuickSortTest : SortInPlaceAlgorithmTestBase<QuickSort>
+    public class QuickSortTest : SortAlgorithmTestBase<QuickSort>
     {
         [Test]
         public override void SortInPlace_Uneven_WhenCalled_SortsCollection()

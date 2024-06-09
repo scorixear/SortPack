@@ -1,9 +1,9 @@
-﻿using SortPack.Domain;
+﻿using SortPack.Domain.Abstractions;
 using SortPack.Domain.Interfaces;
 
 namespace SortPack.Infrastructure.Advanced
 {
-    public class CombSort : SortInPlaceAlgorithm
+    public class CombSort : SortAlgorithm
     {
         private readonly double _shrinkFactor;
         public CombSort(double shrinkFactor = 1.3)

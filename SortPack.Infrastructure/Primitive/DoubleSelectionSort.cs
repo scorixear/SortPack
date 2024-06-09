@@ -1,9 +1,9 @@
-﻿using SortPack.Domain;
+﻿using SortPack.Domain.Abstractions;
 using SortPack.Domain.Interfaces;
 
 namespace SortPack.Infrastructure.Primitive
 {
-    public class DoubleSelectionSort : SortInPlaceAlgorithm
+    public class DoubleSelectionSort : SortAlgorithm
     {
         public DoubleSelectionSort() { }
         public DoubleSelectionSort(IStatisticCounter statisticCounter) : base(statisticCounter) { }

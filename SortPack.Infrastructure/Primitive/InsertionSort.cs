@@ -1,9 +1,9 @@
-﻿using SortPack.Domain;
+﻿using SortPack.Domain.Abstractions;
 using SortPack.Domain.Interfaces;
 
 namespace SortPack.Infrastructure.Primitive
 {
-    public class InsertionSort : SortInPlaceAlgorithm
+    public class InsertionSort : SortAlgorithm
     {
         public InsertionSort() { }
         public InsertionSort(IStatisticCounter statisticCounter) : base(statisticCounter) { }

@@ -1,10 +1,10 @@
-﻿using SortPack.Domain;
+﻿using SortPack.Domain.Abstractions;
 using SortPack.Domain.Interfaces;
 using System.Runtime.CompilerServices;
 
 namespace SortPack.Infrastructure.Advanced
 {
-    public class HeapSort : SortInPlaceAlgorithm
+    public class HeapSort : SortAlgorithm
     {
         public HeapSort()
         {

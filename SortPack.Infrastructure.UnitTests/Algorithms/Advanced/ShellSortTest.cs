@@ -6,7 +6,7 @@ using SortPack.Infrastructure.Advanced;
 namespace SortPack.Infrastructure.UnitTests.Algorithms.Advanced
 {
     [TestFixture]
-    public class ShellSortTest : SortInPlaceAlgorithmTestBaseNoSetup<ShellSort>
+    public class ShellSortTest : SortAlgorithmTestBaseNoSetup<ShellSort>
     {
         [SetUp]
         public void SetUp()

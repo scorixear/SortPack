@@ -6,7 +6,7 @@ using SortPack.Infrastructure.Advanced;
 namespace SortPack.Infrastructure.UnitTests.Algorithms.Advanced
 {
     [TestFixture]
-    public class CombSortTest : SortInPlaceAlgorithmTestBaseNoSetup<CombSort>
+    public class CombSortTest : SortAlgorithmTestBaseNoSetup<CombSort>
     {
         [SetUp]
         public void SetUp()

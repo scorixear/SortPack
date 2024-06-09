@@ -1,6 +1,6 @@
 ﻿using SortPack.Domain.Interfaces;
 
-namespace SortPack.Domain
+namespace SortPack.Domain.Abstractions
 {
     public abstract class SortAlgorithm : ISortAlgorithm
     {
@@ -13,6 +13,16 @@ namespace SortPack.Domain
         {
             StatisticCounter = null;
         }
+
+
+        public abstract IList<T> SortInPlace<T>(IList<T> collection) where T : IComparable<T>;
+
+        public Task<IList<T>> SortInPlaceAsync<T>(IList<T> collection) where T : IComparable<T>
+        {
+            return Task.Run(() => SortInPlace(collection));
+        }
+
+
 
         public abstract IList<T> Sort<T>(IList<T> collection) where T : IComparable<T>;
 

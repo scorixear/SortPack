@@ -1,6 +1,6 @@
 ﻿using SortPack.Domain.Interfaces;
 
-namespace SortPack.Domain
+namespace SortPack.Domain.Extensions
 {
     public static class SortExtension
     {

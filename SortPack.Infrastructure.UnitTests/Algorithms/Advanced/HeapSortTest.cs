@@ -6,7 +6,7 @@ using SortPack.Infrastructure.UnitTests.NUnit;
 namespace SortPack.Infrastructure.UnitTests.Algorithms.Advanced
 {
     [TestFixture]
-    public class HeapSortTest : SortInPlaceAlgorithmTestBase<HeapSort>
+    public class HeapSortTest : SortAlgorithmTestBase<HeapSort>
     {
         [Test]
         public override void SortInPlace_Uneven_WhenCalled_SortsCollection()

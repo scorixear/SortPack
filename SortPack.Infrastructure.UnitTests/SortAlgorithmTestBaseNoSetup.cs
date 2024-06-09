@@ -4,7 +4,7 @@ using SortPack.Infrastructure.UnitTests.NUnit;
 
 namespace SortPack.Infrastructure.UnitTests
 {
-    public abstract class SortInPlaceAlgorithmTestBaseNoSetup<T> where T : ISortInPlaceAlgorithm
+    public abstract class SortAlgorithmTestBaseNoSetup<T> where T : ISortAlgorithm
     {
         protected T Sut { get; set; }
         protected IStatisticCounter StatisticCounter { get; set; }
