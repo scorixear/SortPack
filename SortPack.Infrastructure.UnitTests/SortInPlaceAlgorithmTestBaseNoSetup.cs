@@ -1,22 +1,13 @@
 ﻿using FluentAssertions;
-using SortPack.Domain;
 using SortPack.Domain.Interfaces;
 using SortPack.Infrastructure.UnitTests.NUnit;
 
 namespace SortPack.Infrastructure.UnitTests
 {
-    public abstract class SortInPlaceAlgorithmTest<T> where T : ISortInPlaceAlgorithm
+    public abstract class SortInPlaceAlgorithmTestBaseNoSetup<T> where T : ISortInPlaceAlgorithm
     {
-        protected ISortInPlaceAlgorithm Sut;
-        protected IStatisticCounter StatisticCounter;
-
-        [SetUp]
-        public void SetUp()
-        {
-            StatisticCounter = new StatisticCounter();
-            Sut = (T)typeof(T).GetConstructors()[1].Invoke([StatisticCounter]);
-        }
-
+        protected T Sut { get; set; }
+        protected IStatisticCounter StatisticCounter { get; set; }
         public abstract void SortInPlace_Uneven_WhenCalled_SortsCollection();
 
         public abstract void SortInPlace_Even_WhenCalled_SortsCollection();

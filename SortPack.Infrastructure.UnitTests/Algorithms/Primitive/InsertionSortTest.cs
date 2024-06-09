@@ -5,7 +5,7 @@ using SortPack.Infrastructure.Primitive;
 namespace SortPack.Infrastructure.UnitTests.Algorithms.Primitive
 {
     [TestFixture]
-    public class InsertionSortTest : SortInPlaceAlgorithmTest<InsertionSort>
+    public class InsertionSortTest : SortInPlaceAlgorithmTestBase<InsertionSort>
     {
         [Test]
         public override void SortInPlace_Uneven_WhenCalled_SortsCollection()

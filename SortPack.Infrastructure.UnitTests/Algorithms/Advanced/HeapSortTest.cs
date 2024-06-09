@@ -1,30 +1,29 @@
 ﻿using FluentAssertions;
 using FluentAssertions.AssertMultiple;
-using SortPack.Infrastructure.DivideAndConquer;
+using SortPack.Infrastructure.Advanced;
 using SortPack.Infrastructure.UnitTests.NUnit;
 
-namespace SortPack.Infrastructure.UnitTests.Algorithms.DivideAndConquer
+namespace SortPack.Infrastructure.UnitTests.Algorithms.Advanced
 {
     [TestFixture]
-    public class QuickSortTest : SortInPlaceAlgorithmTestBase<QuickSort>
+    public class HeapSortTest : SortInPlaceAlgorithmTestBase<HeapSort>
     {
         [Test]
         public override void SortInPlace_Uneven_WhenCalled_SortsCollection()
         {
             // Arrange
             var collection = new List<int> { 3, 2, 1 };
-            var random = new Random(1234);
 
             // Act
-            (Sut as QuickSort)?.SortInPlace(collection, random);
+            Sut.SortInPlace(collection);
 
             // Assert
             AssertMultiple.Multiple(() =>
             {
                 collection.Should().BeEquivalentTo(new List<int> { 1, 2, 3 });
-                StatisticCounter.ReadOperations.Should().Be(2);
-                StatisticCounter.WriteOperations.Should().Be(2);
-                StatisticCounter.CompareOperations.Should().Be(13);
+                StatisticCounter.ReadOperations.Should().Be(12);
+                StatisticCounter.WriteOperations.Should().Be(6);
+                StatisticCounter.CompareOperations.Should().Be(3);
 
             });
         }
@@ -34,18 +33,17 @@ namespace SortPack.Infrastructure.UnitTests.Algorithms.DivideAndConquer
         {
             // Arrange
             var collection = new List<int> { 3, 2, 1, 0 };
-            var random = new Random(1234);
 
             // Act
-            (Sut as QuickSort)?.SortInPlace(collection, random);
+            Sut.SortInPlace(collection);
 
             // Assert
             AssertMultiple.Multiple(() =>
             {
                 collection.Should().BeEquivalentTo(new List<int> { 0, 1, 2, 3 });
-                StatisticCounter.ReadOperations.Should().Be(4);
-                StatisticCounter.WriteOperations.Should().Be(4);
-                StatisticCounter.CompareOperations.Should().Be(16);
+                StatisticCounter.ReadOperations.Should().Be(20);
+                StatisticCounter.WriteOperations.Should().Be(8);
+                StatisticCounter.CompareOperations.Should().Be(6);
 
             });
         }
@@ -55,10 +53,9 @@ namespace SortPack.Infrastructure.UnitTests.Algorithms.DivideAndConquer
         {
             // Arrange
             var collection = new List<int>();
-            var random = new Random(1234);
 
             // Act
-            (Sut as QuickSort)?.SortInPlace(collection, random);
+            Sut.SortInPlace(collection);
 
             // Assert
             AssertMultiple.Multiple(() =>
@@ -77,13 +74,13 @@ namespace SortPack.Infrastructure.UnitTests.Algorithms.DivideAndConquer
             CancellationTokenSource source = new();
 
             // Act
-            (Sut as QuickSort)?.RecursiveSortInPlace(collection, source.Token);
+            (Sut as HeapSort)?.RecursiveSortInPlace(collection, source.Token);
 
             // Assert
             AssertMultiple.Multiple(() =>
             {
                 collection.Should().BeEquivalentTo(new List<int> { 1, 2, 3 });
-                StatisticCounter.ReadOperations.Should().Be(11);
+                StatisticCounter.ReadOperations.Should().Be(12);
                 StatisticCounter.WriteOperations.Should().Be(6);
                 StatisticCounter.CompareOperations.Should().Be(3);
 
@@ -98,14 +95,14 @@ namespace SortPack.Infrastructure.UnitTests.Algorithms.DivideAndConquer
             CancellationTokenSource source = new();
 
             // Act
-            (Sut as QuickSort)?.RecursiveSortInPlace(collection, source.Token);
+            (Sut as HeapSort)?.RecursiveSortInPlace(collection, source.Token);
 
             // Assert
             AssertMultiple.Multiple(() =>
             {
                 collection.Should().BeEquivalentTo(new List<int> { 0, 1, 2, 3 });
-                StatisticCounter.ReadOperations.Should().Be(19);
-                StatisticCounter.WriteOperations.Should().Be(10);
+                StatisticCounter.ReadOperations.Should().Be(20);
+                StatisticCounter.WriteOperations.Should().Be(8);
                 StatisticCounter.CompareOperations.Should().Be(6);
 
             });
@@ -119,7 +116,7 @@ namespace SortPack.Infrastructure.UnitTests.Algorithms.DivideAndConquer
             CancellationTokenSource source = new();
 
             // Act
-            (Sut as QuickSort)?.RecursiveSortInPlace(collection, source.Token);
+            (Sut as HeapSort)?.RecursiveSortInPlace(collection, source.Token);
 
             // Assert
             AssertMultiple.Multiple(() =>
@@ -136,6 +133,7 @@ namespace SortPack.Infrastructure.UnitTests.Algorithms.DivideAndConquer
         [TestCase(10_000, TestName = "10-000")]
         [TestCase(100_000, TestName = "100-000")]
         [TestCase(1_000_000, TestName = "1000-000")]
+        [TestCase(10_000_000, TestName = "10-000-000")]
         public async Task MassiveList_RecursiveTest(int numberOfValues)
         {
             try
@@ -150,10 +148,13 @@ namespace SortPack.Infrastructure.UnitTests.Algorithms.DivideAndConquer
 
                 await TimeoutHandler.HandleActionWithCancellationToken(3000, (cancellationToken) =>
                 {
-                    (Sut as QuickSort)?.RecursiveSortInPlace(shuffled, cancellationToken);
+                    (Sut as HeapSort)?.RecursiveSortInPlace(shuffled, cancellationToken);
                 });
 
-                shuffled.Should().BeEquivalentTo(expected);
+                foreach (var (actual, expect) in shuffled.Zip(expected))
+                {
+                    actual.Should().Be(expect);
+                }
             }
             catch (ThreadAbortException)
             {
