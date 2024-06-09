@@ -1,12 +1,20 @@
 ﻿using FluentAssertions;
 using FluentAssertions.AssertMultiple;
-using SortPack.Infrastructure.Primitive;
+using SortPack.Domain;
+using SortPack.Infrastructure.Advanced;
 
-namespace SortPack.Infrastructure.UnitTests.Algorithms.Primitive
+namespace SortPack.Infrastructure.UnitTests.Algorithms.Advanced
 {
     [TestFixture]
-    public class BubbleSortTest : SortInPlaceAlgorithmTestBase<BubbleSort>
+    public class ShellSortTest : SortInPlaceAlgorithmTestBaseNoSetup<ShellSort>
     {
+        [SetUp]
+        public void SetUp()
+        {
+            StatisticCounter = new StatisticCounter();
+            Sut = new ShellSort(StatisticCounter);
+        }
+
         [Test]
         public override void SortInPlace_Uneven_WhenCalled_SortsCollection()
         {
@@ -20,8 +28,8 @@ namespace SortPack.Infrastructure.UnitTests.Algorithms.Primitive
             AssertMultiple.Multiple(() =>
             {
                 collection.Should().BeEquivalentTo(new List<int> { 1, 2, 3 });
-                StatisticCounter.ReadOperations.Should().Be(6);
-                StatisticCounter.WriteOperations.Should().Be(6);
+                StatisticCounter.ReadOperations.Should().Be(5);
+                StatisticCounter.WriteOperations.Should().Be(3);
                 StatisticCounter.CompareOperations.Should().Be(3);
             });
         }
@@ -39,8 +47,8 @@ namespace SortPack.Infrastructure.UnitTests.Algorithms.Primitive
             AssertMultiple.Multiple(() =>
             {
                 collection.Should().BeEquivalentTo(new List<int> { 0, 1, 2, 3 });
-                StatisticCounter.ReadOperations.Should().Be(10);
-                StatisticCounter.WriteOperations.Should().Be(12);
+                StatisticCounter.ReadOperations.Should().Be(9);
+                StatisticCounter.WriteOperations.Should().Be(6);
                 StatisticCounter.CompareOperations.Should().Be(6);
             });
         }
