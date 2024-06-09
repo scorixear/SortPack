@@ -1,6 +1,6 @@
 ﻿namespace SortPack.Domain.Interfaces
 {
-    public interface IRecursiveNumberSortAlgorithm
+    public interface IRecursiveNumberSortAlgorithm : INumberSortAlgorithm
     {
         IList<ulong> RecursiveSort(IList<ulong> collection, CancellationToken? cancellationToken = null);
         IList<uint> RecursiveSort(IList<uint> collection, CancellationToken? cancellationToken = null);

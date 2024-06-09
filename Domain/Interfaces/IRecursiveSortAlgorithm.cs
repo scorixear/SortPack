@@ -1,6 +1,6 @@
 ﻿namespace SortPack.Domain.Interfaces
 {
-    public interface IRecursiveSortAlgorithm
+    public interface IRecursiveSortAlgorithm : ISortAlgorithm
     {
         IList<T> RecursiveSort<T>(IList<T> collection, CancellationToken? cancellationToken = null) where T : IComparable<T>;
         Task<IList<T>> RecursiveSortAsync<T>(IList<T> collection, CancellationToken? cancellationToken = null) where T : IComparable<T>;
