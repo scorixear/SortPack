@@ -21,9 +21,15 @@ namespace SortPack.Infrastructure.Primitive
                     continue;
                 }
 
-                collection.RemoveAt(i);
-                collection.Insert(insertionIndex, key);
-                StatisticCounter?.IncrementWriteOperations((ulong)(i - insertionIndex + 1));
+                // shift elements to the right
+                for (int j = i; j > insertionIndex; j--)
+                {
+                    collection[j] = collection[j - 1];
+                    StatisticCounter?.IncrementReadOperations();
+                    StatisticCounter?.IncrementWriteOperations();
+                }
+
+                collection[insertionIndex] = key;
             }
             return collection;
         }

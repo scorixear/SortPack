@@ -27,9 +27,15 @@ namespace SortPack.Infrastructure.Primitive
                     continue;
                 }
 
-                collection.RemoveAt(i);
-                collection.Insert(j + 1, key);
-                StatisticCounter?.IncrementWriteOperations((ulong)(i - j));
+                // shift elements to the right
+                for (int k = i; k > j + 1; k--)
+                {
+                    collection[k] = collection[k - 1];
+                    StatisticCounter?.IncrementReadOperations();
+                    StatisticCounter?.IncrementWriteOperations();
+                }
+
+                collection[j + 1] = key;
             }
             return collection;
         }
