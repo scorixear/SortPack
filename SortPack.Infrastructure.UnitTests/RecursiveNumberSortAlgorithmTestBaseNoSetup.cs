@@ -4,23 +4,21 @@ using SortPack.Infrastructure.UnitTests.NUnit;
 
 namespace SortPack.Infrastructure.UnitTests
 {
-    public abstract class NumberSortAlgorithmTestBaseNoSetup<T> where T : INumberSortAlgorithm
+    public abstract class RecursiveNumberSortAlgorithmTestBaseNoSetup<T> : NumberSortAlgorithmTestBaseNoSetup<T> where T : IRecursiveNumberSortAlgorithm
     {
-        protected T Sut { get; set; }
-        protected IStatisticCounter StatisticCounter { get; set; }
-        public abstract void SortInPlace_Uneven_WhenCalled_SortsCollection();
+        public abstract void RecursiveSortInPlace_Uneven_WhenCalled_SortsCollection();
+        public abstract void RecursiveSortInPlace_Even_WhenCalled_SortsCollection();
 
-        public abstract void SortInPlace_Even_WhenCalled_SortsCollection();
-
-        public abstract void SortInPlace_EmptyList_DoNothing();
+        public abstract void RecursiveSortInPlace_EmptyList_DoNothing();
 
         [Test, CancelOnInconclusive]
-        [TestCase(1000ul, TestName = "1-000")]
+        [NonParallelizable]
+        [TestCase(1_000ul, TestName = "1-000")]
         [TestCase(10_000ul, TestName = "10-000")]
         [TestCase(100_000ul, TestName = "100-000")]
-        [TestCase(1_000_000ul, TestName = "1-000-000")]
+        [TestCase(1_000_000ul, TestName = "1000-000")]
         [TestCase(10_000_000ul, TestName = "10-000-000")]
-        public async Task MassiveList_Test(ulong numberOfValues)
+        public async Task MassiveList_RecursiveTest(ulong numberOfValues)
         {
             try
             {
@@ -32,9 +30,9 @@ namespace SortPack.Infrastructure.UnitTests
                 ulong[] shuffled = [.. expected];
                 Random.Shared.Shuffle(shuffled);
 
-                await TimeoutHandler.HandleActionWithoutCancellationToken(3000, () =>
+                await TimeoutHandler.HandleActionWithCancellationToken(3000, (cancellationToken) =>
                 {
-                    Sut.SortInPlace(shuffled);
+                    Sut.RecursiveSortInPlace(shuffled, cancellationToken);
                 });
 
                 foreach (var (actual, expect) in shuffled.Zip(expected))

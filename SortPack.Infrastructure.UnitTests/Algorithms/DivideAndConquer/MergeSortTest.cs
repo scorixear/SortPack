@@ -1,12 +1,11 @@
 ﻿using FluentAssertions;
 using FluentAssertions.AssertMultiple;
 using SortPack.Infrastructure.DivideAndConquer;
-using SortPack.Infrastructure.UnitTests.NUnit;
 
 namespace SortPack.Infrastructure.UnitTests.Algorithms.DivideAndConquer
 {
     [TestFixture]
-    public class MergeSortTest : SortAlgorithmTestBase<MergeSort>
+    public class MergeSortTest : RecursiveSortAlgorithmTestBase<MergeSort>
     {
         [Test]
         public override void SortInPlace_Uneven_WhenCalled_SortsCollection()
@@ -67,14 +66,14 @@ namespace SortPack.Infrastructure.UnitTests.Algorithms.DivideAndConquer
         }
 
         [Test]
-        public void RecursiveSortInPlace_Uneven_WhenCalled_SortsCollection()
+        public override void RecursiveSortInPlace_Uneven_WhenCalled_SortsCollection()
         {
             // Arrange
             var collection = new List<int> { 3, 2, 1 };
             CancellationTokenSource source = new();
 
             // Act
-            (Sut as MergeSort)?.RecursiveSortInPlace(collection, source.Token);
+            Sut.RecursiveSortInPlace(collection, source.Token);
 
             // Assert
             AssertMultiple.Multiple(() =>
@@ -88,14 +87,14 @@ namespace SortPack.Infrastructure.UnitTests.Algorithms.DivideAndConquer
         }
 
         [Test]
-        public void RecursiveSortInPlace_Even_WhenCalled_SortsCollection()
+        public override void RecursiveSortInPlace_Even_WhenCalled_SortsCollection()
         {
             // Arrange
             var collection = new List<int> { 3, 2, 1, 0 };
             CancellationTokenSource source = new();
 
             // Act
-            (Sut as MergeSort)?.RecursiveSortInPlace(collection, source.Token);
+            Sut.RecursiveSortInPlace(collection, source.Token);
 
             // Assert
             AssertMultiple.Multiple(() =>
@@ -109,14 +108,14 @@ namespace SortPack.Infrastructure.UnitTests.Algorithms.DivideAndConquer
         }
 
         [Test]
-        public void RecursiveSortInPlace_EmptyList_DoNothing()
+        public override void RecursiveSortInPlace_EmptyList_DoNothing()
         {
             // Arrange
             var collection = new List<int>();
             CancellationTokenSource source = new();
 
             // Act
-            (Sut as MergeSort)?.RecursiveSortInPlace(collection, source.Token);
+            Sut.RecursiveSortInPlace(collection, source.Token);
 
             // Assert
             AssertMultiple.Multiple(() =>
@@ -127,40 +126,7 @@ namespace SortPack.Infrastructure.UnitTests.Algorithms.DivideAndConquer
             });
         }
 
-        [Test]
-        [NonParallelizable]
-        [TestCase(1_000, TestName = "1-000")]
-        [TestCase(10_000, TestName = "10-000")]
-        [TestCase(100_000, TestName = "100-000")]
-        [TestCase(1_000_000, TestName = "1000-000")]
-        [TestCase(10_000_000, TestName = "10-000-000")]
-        public async Task MassiveList_RecursiveTest(int numberOfValues)
-        {
-            try
-            {
-                List<int> expected = [];
-                for (int i = 0; i < numberOfValues; i++)
-                {
-                    expected.Add(i);
-                }
-                List<int> shuffled = expected.ToList();
-                shuffled.Reverse();
 
-                await TimeoutHandler.HandleActionWithCancellationToken(3000, (cancellationToken) =>
-                {
-                    (Sut as MergeSort)?.RecursiveSortInPlace(shuffled, cancellationToken);
-                });
-
-                foreach (var (actual, expect) in shuffled.Zip(expected))
-                {
-                    actual.Should().Be(expect);
-                }
-            }
-            catch (ThreadAbortException)
-            {
-                Console.WriteLine($"Test with {numberOfValues} timed out");
-            }
-        }
 
     }
 }

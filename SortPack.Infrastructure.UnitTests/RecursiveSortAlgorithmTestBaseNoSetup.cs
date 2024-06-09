@@ -4,23 +4,22 @@ using SortPack.Infrastructure.UnitTests.NUnit;
 
 namespace SortPack.Infrastructure.UnitTests
 {
-    public abstract class SortAlgorithmTestBaseNoSetup<T> where T : ISortAlgorithm
+    public abstract class RecursiveSortAlgorithmTestBaseNoSetup<T> : SortAlgorithmTestBaseNoSetup<T> where T : IRecursiveSortAlgorithm
     {
-        protected T Sut { get; set; }
-        protected IStatisticCounter StatisticCounter { get; set; }
-        public abstract void SortInPlace_Uneven_WhenCalled_SortsCollection();
 
-        public abstract void SortInPlace_Even_WhenCalled_SortsCollection();
+        public abstract void RecursiveSortInPlace_Uneven_WhenCalled_SortsCollection();
+        public abstract void RecursiveSortInPlace_Even_WhenCalled_SortsCollection();
 
-        public abstract void SortInPlace_EmptyList_DoNothing();
+        public abstract void RecursiveSortInPlace_EmptyList_DoNothing();
 
         [Test, CancelOnInconclusive]
+        [NonParallelizable]
         [TestCase(1_000, TestName = "1-000")]
         [TestCase(10_000, TestName = "10-000")]
         [TestCase(100_000, TestName = "100-000")]
-        [TestCase(1_000_000, TestName = "1-000-000")]
+        [TestCase(1_000_000, TestName = "1000-000")]
         [TestCase(10_000_000, TestName = "10-000-000")]
-        public async Task MassiveList_Test(int numberOfValues)
+        public async Task MassiveList_RecursiveTest(int numberOfValues)
         {
             try
             {
@@ -32,9 +31,9 @@ namespace SortPack.Infrastructure.UnitTests
                 int[] shuffled = [.. expected];
                 Random.Shared.Shuffle(shuffled);
 
-                await TimeoutHandler.HandleActionWithoutCancellationToken(3000, () =>
+                await TimeoutHandler.HandleActionWithCancellationToken(3000, (cancellationToken) =>
                 {
-                    Sut.SortInPlace(shuffled);
+                    Sut.RecursiveSortInPlace(shuffled, cancellationToken);
                 });
 
                 foreach (var (actual, expect) in shuffled.Zip(expected))
