@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace SortPack.Infrastructure.NonComparison
 {
+    // ReSharper disable once InconsistentNaming
     public sealed class RadixLSDSort : NumberSortAlgorithm
     {
         public RadixLSDSort()
@@ -27,10 +28,10 @@ namespace SortPack.Infrastructure.NonComparison
 
                 for (int i = 0; i < n; i++)
                 {
-                    int byteValue = GetByteValue(collection[i], digit);
-                    StatisticCounter?.IncrementReadOperations();
+                    byte byteValue = GetByteValue(collection[i], digit);
                     count[byteValue]++;
                 }
+                StatisticCounter?.IncrementReadOperations((ulong)n);
 
                 for (int i = 1; i < bucketCount; i++)
                 {
@@ -40,10 +41,11 @@ namespace SortPack.Infrastructure.NonComparison
                 for (int i = n - 1; i >= 0; i--)
                 {
                     T value = collection[i];
-                    StatisticCounter?.IncrementReadOperations();
-                    int byteValue = GetByteValue(value, digit);
+
+                    byte byteValue = GetByteValue(value, digit);
                     output[--count[byteValue]] = value;
                 }
+                StatisticCounter?.IncrementReadOperations((ulong)n);
 
                 for (int i = 0; i < n; i++)
                 {

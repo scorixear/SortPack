@@ -113,29 +113,20 @@ namespace SortPack.Domain.Abstractions
         public IList<short> SortInPlace(IList<short> collection) => SortInPlace<short>(collection);
         public IList<sbyte> SortInPlace(IList<sbyte> collection) => SortInPlace<sbyte>(collection);
 
-        protected abstract IList<T> SortInPlace<T>(IList<T> collection) where T : unmanaged;
+        protected abstract IList<T> SortInPlace<T>(IList<T> collection) where T : IComparable<T>;
 
-        protected static int GetByteValue<T>(T value, int bytePosition) where T : unmanaged
+        protected static byte GetByteValue<T>(T value, int byteIndex) where T : IComparable<T>
         {
-            ulong longValue = ConvertToUInt64(value);
-            int byteValue = (int)((longValue >> (bytePosition * 8)) & 0xFF);
-            return byteValue;
-        }
-
-        private static ulong ConvertToUInt64<T>(T value) where T : unmanaged
-        {
-            return value switch
+            if (typeof(T) == typeof(ulong) || typeof(T) == typeof(uint) || typeof(T) == typeof(ushort) || typeof(T) == typeof(byte))
             {
-                byte b => b,
-                sbyte sb => unchecked((ulong)sb),
-                ushort us => us,
-                short s => unchecked((ulong)s),
-                uint ui => ui,
-                int i => unchecked((ulong)i),
-                ulong ul => ul,
-                long l => unchecked((ulong)l),
-                _ => throw new NotSupportedException()
-            };
+                ulong ulongValue = Convert.ToUInt64(value);
+                return (byte)((ulongValue >> (byteIndex * 8)) & 0xFF);
+            }
+            else
+            {
+                long longValue = Convert.ToInt64(value);
+                return (byte)((longValue >> (byteIndex * 8)) & 0xFF);
+            }
         }
     }
 }

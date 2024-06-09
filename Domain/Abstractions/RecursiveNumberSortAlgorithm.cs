@@ -145,6 +145,6 @@ namespace SortPack.Domain.Abstractions
             return Task.Run(() => RecursiveSortInPlace(collection, cancellationToken));
         }
 
-        protected abstract IList<T> RecursiveSortInPlace<T>(IList<T> collection, CancellationToken? cancellationToken = null) where T : unmanaged;
+        protected abstract IList<T> RecursiveSortInPlace<T>(IList<T> collection, CancellationToken? cancellationToken = null) where T : IComparable<T>;
     }
 }

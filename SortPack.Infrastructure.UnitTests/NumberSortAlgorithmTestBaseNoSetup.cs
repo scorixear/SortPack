@@ -15,19 +15,19 @@ namespace SortPack.Infrastructure.UnitTests
         public abstract void SortInPlace_EmptyList_DoNothing();
 
         [Test, CancelOnInconclusive]
-        [TestCase(1000ul, TestName = "1-000")]
-        [TestCase(10_000ul, TestName = "10-000")]
-        [TestCase(100_000ul, TestName = "100-000")]
-        [TestCase(1_000_000ul, TestName = "1-000-000")]
-        [TestCase(10_000_000ul, TestName = "10-000-000")]
-        public async Task MassiveList_Test(ulong numberOfValues)
+        [TestCase(1000, TestName = "1-000")]
+        [TestCase(10_000, TestName = "10-000")]
+        [TestCase(100_000, TestName = "100-000")]
+        [TestCase(1_000_000, TestName = "1-000-000")]
+        [TestCase(10_000_000, TestName = "10-000-000")]
+        public async Task MassiveList_Test(int numberOfValues)
         {
             try
             {
                 List<ulong> expected = [];
-                for (ulong i = 0; i < numberOfValues; i++)
+                for (int i = 0; i < numberOfValues; i++)
                 {
-                    expected.Add(i);
+                    expected.Add((ulong)i);
                 }
                 ulong[] shuffled = [.. expected];
                 Random.Shared.Shuffle(shuffled);
