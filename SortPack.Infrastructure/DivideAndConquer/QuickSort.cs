@@ -112,50 +112,41 @@ namespace SortPack.Infrastructure.DivideAndConquer
 
         private void RecursiveCall<T>(IList<T> collection, int left, int right, CancellationToken? cancellationToken = null) where T : IComparable<T>
         {
-            //cancellationToken?.ThrowIfCancellationRequested();
-            if (RuntimeHelpers.TryEnsureSufficientExecutionStack())
+            while (true)
             {
-                throw new InsufficientExecutionStackException();
-            }
-            RuntimeHelpers.EnsureSufficientExecutionStack();
+                //Console.Error.WriteLine($"left: {left}, right: {right}");
+                cancellationToken?.ThrowIfCancellationRequested();
+                RuntimeHelpers.EnsureSufficientExecutionStack();
 
-            if (left >= right)
-            {
-                return;
-            }
+                if (left >= right)
+                {
+                    return;
+                }
 
-            int i = left;
-            int j = right;
+                int pi = Partition(collection, left, right);
+                RecursiveCall(collection, left, pi - 1, cancellationToken);
+                left = pi + 1;
+            }
+        }
+
+        private int Partition<T>(IList<T> collection, int left, int right) where T : IComparable<T>
+        {
             T pivot = collection[right];
+            StatisticCounter?.IncrementReadOperations();
+            int i = left - 1;
 
-            while (i < j)
+            for (int j = left; j < right; j++)
             {
-                while (i < j && LessThanOrEqual(collection[i], pivot))
+                StatisticCounter?.IncrementReadOperations();
+                if (LessThan(collection[j], pivot))
                 {
                     i++;
-                }
-                while (j > i && GreaterThan(collection[j], pivot))
-                {
-                    j--;
-                }
-                if (GreaterThan(collection, i, j))
-                {
                     Swap(collection, i, j);
                 }
             }
 
-            if (GreaterThan(collection, i, right))
-            {
-                Swap(collection, i, right);
-            }
-            else
-            {
-                i = right;
-            }
-
-            int pivotIndex = i;
-            RecursiveCall(collection, left, pivotIndex - 1, cancellationToken);
-            RecursiveCall(collection, pivotIndex + 1, right, cancellationToken);
+            Swap(collection, i + 1, right);
+            return i + 1;
         }
 
     }

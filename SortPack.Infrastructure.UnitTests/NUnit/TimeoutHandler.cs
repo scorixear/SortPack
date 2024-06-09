@@ -106,5 +106,12 @@ namespace SortPack.Infrastructure.UnitTests.NUnit
                 }
             }
         }
+
+        private static void Run(Action<CancellationToken> action, CancellationToken token, int stackSize)
+        {
+            var thread = new Thread(() => action.Invoke(token), stackSize);
+            thread.Start();
+            thread.Join();
+        }
     }
 }

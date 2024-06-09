@@ -83,9 +83,9 @@ namespace SortPack.Infrastructure.UnitTests.Algorithms.DivideAndConquer
             AssertMultiple.Multiple(() =>
             {
                 collection.Should().BeEquivalentTo(new List<int> { 1, 2, 3 });
-                StatisticCounter.ReadOperations.Should().Be(12);
-                StatisticCounter.WriteOperations.Should().Be(2);
-                StatisticCounter.CompareOperations.Should().Be(11);
+                StatisticCounter.ReadOperations.Should().Be(11);
+                StatisticCounter.WriteOperations.Should().Be(6);
+                StatisticCounter.CompareOperations.Should().Be(3);
 
             });
         }
@@ -104,9 +104,9 @@ namespace SortPack.Infrastructure.UnitTests.Algorithms.DivideAndConquer
             AssertMultiple.Multiple(() =>
             {
                 collection.Should().BeEquivalentTo(new List<int> { 0, 1, 2, 3 });
-                StatisticCounter.ReadOperations.Should().Be(20);
-                StatisticCounter.WriteOperations.Should().Be(4);
-                StatisticCounter.CompareOperations.Should().Be(19);
+                StatisticCounter.ReadOperations.Should().Be(19);
+                StatisticCounter.WriteOperations.Should().Be(10);
+                StatisticCounter.CompareOperations.Should().Be(6);
 
             });
         }

@@ -26,7 +26,7 @@ namespace SortPack.Infrastructure.DivideAndConquer
         {
             int length = collection.Count;
 
-            List<T> auxiliary = collection.ToList();
+            List<T?> auxiliary = Enumerable.Repeat(default(T), length).ToList();
             for (int currSize = 1; currSize < length; currSize *= 2)
             {
                 for (int leftStart = 0; leftStart < length - 1; leftStart += 2 * currSize)
@@ -73,7 +73,7 @@ namespace SortPack.Infrastructure.DivideAndConquer
 
                     for (int l = leftStart; l <= rightEnd; l++)
                     {
-                        collection[l] = auxiliary[l];
+                        collection[l] = auxiliary[l]!;
                     }
                     StatisticCounter?.IncrementWriteOperations((ulong)(rightEnd - leftStart + 1));
                 }
@@ -93,13 +93,13 @@ namespace SortPack.Infrastructure.DivideAndConquer
             {
                 return collection;
             }
-            IList<T> auxiliary = collection.ToList();
+            List<T?> auxiliary = Enumerable.Repeat(default(T), collection.Count).ToList();
             RecursiveCall(collection, auxiliary, 0, collection.Count - 1, cancellationToken ?? CancellationToken.None);
             StatisticCounter?.IncrementWriteOperations((ulong)auxiliary.Count);
             return collection;
         }
 
-        private void RecursiveCall<T>(IList<T> collection, IList<T> auxiliary, int left, int right, CancellationToken cancellationToken) where T : IComparable<T>
+        private void RecursiveCall<T>(IList<T> collection, IList<T?> auxiliary, int left, int right, CancellationToken cancellationToken) where T : IComparable<T>
         {
             cancellationToken.ThrowIfCancellationRequested();
             RuntimeHelpers.EnsureSufficientExecutionStack();
@@ -152,8 +152,9 @@ namespace SortPack.Infrastructure.DivideAndConquer
 
             for (int l = left; l <= right; l++)
             {
-                collection[l] = auxiliary[l];
+                collection[l] = auxiliary[l]!;
             }
+            StatisticCounter?.IncrementWriteOperations((ulong)(right - left + 1));
         }
 
     }

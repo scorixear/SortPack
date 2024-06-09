@@ -81,7 +81,7 @@ namespace SortPack.Infrastructure.UnitTests.Algorithms.DivideAndConquer
             {
                 collection.Should().BeEquivalentTo(new List<int> { 1, 2, 3 });
                 StatisticCounter.ReadOperations.Should().Be(9);
-                StatisticCounter.WriteOperations.Should().Be(3);
+                StatisticCounter.WriteOperations.Should().Be(8);
                 StatisticCounter.CompareOperations.Should().Be(2);
 
             });
@@ -102,7 +102,7 @@ namespace SortPack.Infrastructure.UnitTests.Algorithms.DivideAndConquer
             {
                 collection.Should().BeEquivalentTo(new List<int> { 0, 1, 2, 3 });
                 StatisticCounter.ReadOperations.Should().Be(16);
-                StatisticCounter.WriteOperations.Should().Be(4);
+                StatisticCounter.WriteOperations.Should().Be(12);
                 StatisticCounter.CompareOperations.Should().Be(4);
 
             });
