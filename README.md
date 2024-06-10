@@ -3,11 +3,12 @@
 
 SortPack is a NugetPackage Library for sorting algorithms.
 
-Its goal is to provide an easy access to all commonly known sorting algorithms.
-As this is will always be a work in progress, future versions will include more sorting algorithms.
+Its goal is to provide an easy access to all commonly known sorting algorithms.<br>
+As this will always be a work in progress, future versions will include more sorting algorithms.
 
 ## Installation
 To install SortPack, run the following command in the Package Manager Console:
+
 ```bash
 Install-Package SortPack -Version 1.0.0
 ```
@@ -22,24 +23,25 @@ using SortPack.Infrastructure.Joke;
 
 public class Program
 {
-	public static void Main()
-	{
-		int[] array = new int[] { 5, 3, 8, 4, 2, 1, 9, 7, 6 };
-		IStatisticCounter statisticCounter = new StatisticCounter();
-		ISortAlgorithm sortAlgorithm = new QuickSort(statisticCounter);
-		int[] sortedArray = array.SortWith(sortAlgorithm);
+  public static void Main()
+  {
+    int[] array = new int[] { 5, 3, 8, 4, 2, 1, 9, 7, 6 };
 
-		Console.WriteLine($"Used {statisticCounter.ReadOperations} reads");
+    IStatisticCounter statisticCounter = new StatisticCounter();
+    ISortAlgorithm sortAlgorithm = new QuickSort(statisticCounter);
+    int[] sortedArray = array.SortWith(sortAlgorithm);
+
+    Console.WriteLine($"Used {statisticCounter.ReadOperations} reads");
     Console.WriteLine($"Used {statisticCounter.WriteOperations} writes");
     Console.WriteLine($"Used {statisticCounter.CompareOperations} compares");
 
-		using(var cts = new CancellationTokenSource())
-		{
-			Task task = Task.Run(() => new BogoSort().SortInPlace(array, cts.Token));
-			cts.CancelAfter(1000);
-			task.Wait();
-		}
-	}
+    using(var cts = new CancellationTokenSource())
+    {
+      Task task = Task.Run(() => new BogoSort().SortInPlace(array, cts.Token));
+      cts.CancelAfter(1000);
+      task.Wait();
+    }
+  }
 }
 ```
 
