@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SortPack.Domain", "Domain\SortPack.Domain.csproj", "{33538486-9A17-4363-A144-8B6618EE1E4D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SortPack.Domain", "SortPack.Domain\SortPack.Domain.csproj", "{33538486-9A17-4363-A144-8B6618EE1E4D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SortPack.Infrastructure", "SortPack.Infrastructure\SortPack.Infrastructure.csproj", "{457DACCE-0D3E-44C8-8E00-0AC5D3BCCBF7}"
 EndProject

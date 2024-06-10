@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SortPack.Domain\SortPack.Domain.csproj" />
     <ProjectReference Include="..\SortPack.Infrastructure\SortPack.Infrastructure.csproj" />
   </ItemGroup>
 
