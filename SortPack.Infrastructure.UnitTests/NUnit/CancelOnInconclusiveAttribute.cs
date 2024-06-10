@@ -34,6 +34,6 @@ public class CancelOnInconclusiveAttribute : NUnitAttribute, ITestAction
 
     private string GetTestKey(ITest test)
     {
-        return $"{test.Parent.FullName}.{test.MethodName}";
+        return $"{test.Parent?.FullName}.{test.MethodName}";
     }
 }

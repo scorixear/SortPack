@@ -1,6 +1,4 @@
-﻿using System.Runtime;
-
-namespace SortPack.Infrastructure.UnitTests.NUnit;
+﻿namespace SortPack.Infrastructure.UnitTests.NUnit;
 
 public static class TimeoutHandler
 {
@@ -61,72 +59,5 @@ public static class TimeoutHandler
                 }
             }
         }
-    }
-
-
-    public static async Task HandleActionWithoutCancellationToken(int timeOutInMilliseconds, Action action)
-    {
-        using (CancellationTokenSource cts = new())
-        {
-            CancellationToken token = cts.Token;
-            Task task = Task.Run(() =>
-            {
-                try
-                {
-                    ControlledExecution.Run(action, token);
-                }
-                catch (OperationCanceledException)
-                {
-                    Assert.Inconclusive("Test exceeded timeout of " + timeOutInMilliseconds + "ms");
-                }
-                catch (InsufficientExecutionStackException)
-                {
-                    Assert.Inconclusive("Stack limit reached");
-                }
-                catch (ThreadAbortException)
-                {
-                    Assert.Inconclusive("Thread aborted");
-                }
-                catch (OutOfMemoryException)
-                {
-                    Assert.Inconclusive("Out of memory");
-                }
-            }, token);
-            if (await Task.WhenAny(Task.Delay(timeOutInMilliseconds), task) == task)
-            {
-                await task;
-            }
-            else
-            {
-                cts.Cancel();
-                try
-                {
-                    await task;
-                }
-                catch (OperationCanceledException)
-                {
-                    Assert.Inconclusive("Test exceeded timeout of " + timeOutInMilliseconds + "ms");
-                }
-                catch (InsufficientExecutionStackException)
-                {
-                    Assert.Inconclusive("Stack limit reached");
-                }
-                catch (ThreadAbortException)
-                {
-                    Assert.Inconclusive("Thread aborted");
-                }
-                catch (OutOfMemoryException)
-                {
-                    Assert.Inconclusive("Out of memory");
-                }
-            }
-        }
-    }
-
-    private static void Run(Action<CancellationToken> action, CancellationToken token, int stackSize)
-    {
-        Thread thread = new(() => action.Invoke(token), stackSize);
-        thread.Start();
-        thread.Join();
     }
 }

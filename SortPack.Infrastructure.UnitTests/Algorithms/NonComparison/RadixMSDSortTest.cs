@@ -278,9 +278,9 @@ public class RadixMSDSortTest : RecursiveNumberSortAlgorithmTestBase<RadixMSDSor
             string[] shuffled = [.. expected];
             Random.Shared.Shuffle(shuffled);
 
-            await TimeoutHandler.HandleActionWithoutCancellationToken(3000, () =>
+            await TimeoutHandler.HandleActionWithCancellationToken(3000, (token) =>
             {
-                Sut!.SortInPlace(shuffled);
+                Sut!.SortInPlace(shuffled, token);
             });
 
             foreach ((string actual, string expect) in shuffled.Zip(expected))

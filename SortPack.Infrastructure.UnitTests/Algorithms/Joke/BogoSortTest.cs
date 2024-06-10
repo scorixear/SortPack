@@ -14,8 +14,7 @@ public class BogoSortTest : SortAlgorithmTestBase<BogoSort>
         List<int> collection = [3, 2, 1];
 
         // Act
-        TimeoutHandler.HandleActionWithoutCancellationToken(3000, () => Sut?.SortInPlace(collection)).Wait();
-        Sut?.SortInPlace(collection);
+        TimeoutHandler.HandleActionWithCancellationToken(3000, (token) => Sut?.SortInPlace(collection, token)).Wait();
 
         // Assert
         AssertMultiple.Multiple(() =>
@@ -31,7 +30,7 @@ public class BogoSortTest : SortAlgorithmTestBase<BogoSort>
         List<int> collection = [3, 2, 1, 0];
 
         // Act
-        TimeoutHandler.HandleActionWithoutCancellationToken(3000, () => Sut?.SortInPlace(collection)).Wait();
+        TimeoutHandler.HandleActionWithCancellationToken(3000, (token) => Sut?.SortInPlace(collection, token)).Wait();
 
         // Assert
         AssertMultiple.Multiple(() =>
