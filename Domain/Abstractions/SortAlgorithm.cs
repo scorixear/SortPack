@@ -4,7 +4,7 @@ namespace SortPack.Domain.Abstractions
 {
     public abstract class SortAlgorithm : ISortAlgorithm
     {
-        protected IStatisticCounter? StatisticCounter;
+        public IStatisticCounter? StatisticCounter;
         protected SortAlgorithm(IStatisticCounter statisticCounter)
         {
             StatisticCounter = statisticCounter ?? throw new ArgumentNullException(nameof(statisticCounter));

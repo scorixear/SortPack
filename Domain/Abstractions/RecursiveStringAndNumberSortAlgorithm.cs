@@ -2,7 +2,7 @@
 
 namespace SortPack.Domain.Abstractions
 {
-    public abstract class RecursiveStringAndNumberSortAlgorithm : RecursiveNumberSortAlgorithm, IStringSortAlgorithm, IRecursiveStringSortAlgorithm
+    public abstract class RecursiveStringAndNumberSortAlgorithm : RecursiveNumberSortAlgorithm, IRecursiveStringSortAlgorithm
     {
         protected RecursiveStringAndNumberSortAlgorithm() { }
         protected RecursiveStringAndNumberSortAlgorithm(IStatisticCounter statisticCounter) : base(statisticCounter) { }

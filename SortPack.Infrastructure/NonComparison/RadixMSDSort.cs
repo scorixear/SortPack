@@ -1,5 +1,6 @@
 ﻿using SortPack.Domain.Abstractions;
 using SortPack.Domain.Interfaces;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace SortPack.Infrastructure.NonComparison
@@ -7,7 +8,7 @@ namespace SortPack.Infrastructure.NonComparison
     // ReSharper disable once InconsistentNaming
     public sealed class RadixMSDSort : RecursiveStringAndNumberSortAlgorithm
     {
-        public RadixMSDSort() : base()
+        public RadixMSDSort()
         {
         }
 
@@ -15,7 +16,7 @@ namespace SortPack.Infrastructure.NonComparison
         {
         }
 
-        protected override IList<T> SortInPlace<T>(IList<T> collection)
+        public override IList<T> SortInPlace<T>(IList<T> collection)
         {
             if (collection.Count == 0)
             {
@@ -135,7 +136,7 @@ namespace SortPack.Infrastructure.NonComparison
             return collection;
         }
 
-        protected override IList<T> RecursiveSortInPlace<T>(IList<T> collection, CancellationToken? cancellationToken = null)
+        public override IList<T> RecursiveSortInPlace<T>(IList<T> collection, CancellationToken? cancellationToken = null)
         {
             if (collection.Count == 0)
             {
@@ -191,7 +192,7 @@ namespace SortPack.Infrastructure.NonComparison
             }
         }
 
-        private void RecursiveCall<T>(IList<T> collection, int start, int end, int byteIndex, CancellationToken cancellationToken) where T : IComparable<T>
+        private void RecursiveCall<T>(IList<T> collection, int start, int end, int byteIndex, CancellationToken cancellationToken) where T : IComparable<T>, IBitwiseOperators<T, T, T>, IShiftOperators<T, int, T>
         {
             cancellationToken.ThrowIfCancellationRequested();
             RuntimeHelpers.EnsureSufficientExecutionStack();

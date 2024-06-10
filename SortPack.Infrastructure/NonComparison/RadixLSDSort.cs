@@ -15,7 +15,7 @@ namespace SortPack.Infrastructure.NonComparison
         }
 
 
-        protected override IList<T> SortInPlace<T>(IList<T> collection)
+        public override IList<T> SortInPlace<T>(IList<T> collection)
         {
             int n = collection.Count;
             T[] output = new T[n];
