@@ -61,6 +61,7 @@ public class BogoSort : SortAlgorithm
             {
                 return false;
             }
+            prev = next;
         }
 
         return true;
