@@ -63,6 +63,7 @@ public class BucketSort<TS> : NumberSortAlgorithm where TS : SortAlgorithm
                 maxValue = value;
             }
         }
+        StatisticCounter?.IncrementCompareOperations((ulong)collection.Count);
         StatisticCounter?.IncrementReadOperations((ulong)collection.Count);
 
         int numberOfBuckets = collection.Count / bucketSize;

@@ -1,11 +1,10 @@
 ﻿using FluentAssertions;
 using FluentAssertions.AssertMultiple;
 using SortPack.Infrastructure.NonComparison;
-using SortPack.Infrastructure.Primitive;
 
 namespace SortPack.Infrastructure.UnitTests.Algorithms.NonComparison;
 
-public class BucketSortTest : NumberSortAlgorithmTestBase<BucketSort<InsertionSort>>
+public class CountingSortTest : NumberSortAlgorithmTestBase<CountingSort>
 {
     [Test]
     public override void SortInPlace_Uneven_WhenCalled_SortsCollection()
@@ -20,9 +19,9 @@ public class BucketSortTest : NumberSortAlgorithmTestBase<BucketSort<InsertionSo
         AssertMultiple.Multiple(() =>
         {
             collection.Should().BeEquivalentTo(new List<int> { 1, 2, 3 });
-            StatisticCounter?.ReadOperations.Should().Be(28);
-            StatisticCounter?.WriteOperations.Should().Be(9);
-            StatisticCounter?.CompareOperations.Should().Be(12);
+            StatisticCounter?.ReadOperations.Should().Be(9);
+            StatisticCounter?.WriteOperations.Should().Be(3);
+            StatisticCounter?.CompareOperations.Should().Be(4);
 
         });
     }
@@ -40,9 +39,9 @@ public class BucketSortTest : NumberSortAlgorithmTestBase<BucketSort<InsertionSo
         AssertMultiple.Multiple(() =>
         {
             collection.Should().BeEquivalentTo(new List<int> { 0, 1, 2, 3 });
-            StatisticCounter?.ReadOperations.Should().Be(46);
-            StatisticCounter?.WriteOperations.Should().Be(16);
-            StatisticCounter?.CompareOperations.Should().Be(20);
+            StatisticCounter?.ReadOperations.Should().Be(12);
+            StatisticCounter?.WriteOperations.Should().Be(4);
+            StatisticCounter?.CompareOperations.Should().Be(6);
 
         });
     }

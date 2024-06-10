@@ -19,7 +19,8 @@ public abstract class NumberSortAlgorithm : INumberSortAlgorithm
         IBitwiseOperators<T, T, T>,
         IShiftOperators<T, int, T>,
         IDivisionOperators<T, T, T>,
-        IAdditionOperators<T, T, T>
+        IAdditionOperators<T, T, T>,
+        ISubtractionOperators<T, T, T>
     {
         List<T> result = [.. collection];
         return SortInPlace(result);
@@ -29,7 +30,8 @@ public abstract class NumberSortAlgorithm : INumberSortAlgorithm
         IBitwiseOperators<T, T, T>,
         IShiftOperators<T, int, T>,
         IDivisionOperators<T, T, T>,
-        IAdditionOperators<T, T, T>
+        IAdditionOperators<T, T, T>,
+        ISubtractionOperators<T, T, T>
     {
         return Task.Run(() => Sort(collection));
     }
@@ -38,12 +40,15 @@ public abstract class NumberSortAlgorithm : INumberSortAlgorithm
         IBitwiseOperators<T, T, T>,
         IShiftOperators<T, int, T>,
         IDivisionOperators<T, T, T>,
-        IAdditionOperators<T, T, T>;
+        IAdditionOperators<T, T, T>,
+        ISubtractionOperators<T, T, T>;
+
     public Task<IList<T>> SortInPlaceAsync<T>(IList<T> collection) where T : IComparable<T>,
         IBitwiseOperators<T, T, T>,
         IShiftOperators<T, int, T>,
         IDivisionOperators<T, T, T>,
-        IAdditionOperators<T, T, T>
+        IAdditionOperators<T, T, T>,
+        ISubtractionOperators<T, T, T>
     {
         return Task.Run(() => SortInPlace(collection));
     }

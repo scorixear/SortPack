@@ -20,6 +20,7 @@ public abstract class NumberSortAlgorithmTestBaseNoSetup<T> where T : INumberSor
     [TestCase(100_000, TestName = "100-000")]
     [TestCase(1_000_000, TestName = "1-000-000")]
     [TestCase(10_000_000, TestName = "10-000-000")]
+    [TestCase(100_000_000, TestName = "100-000-000")]
     public async Task MassiveList_Test(int numberOfValues)
     {
         try
@@ -34,7 +35,7 @@ public abstract class NumberSortAlgorithmTestBaseNoSetup<T> where T : INumberSor
 
             await TimeoutHandler.HandleActionWithoutCancellationToken(3000, () =>
             {
-                Sut.SortInPlace(shuffled);
+                Sut?.SortInPlace(shuffled);
             });
 
             foreach ((ulong actual, ulong expect) in shuffled.Zip(expected))
