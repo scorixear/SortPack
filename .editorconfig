@@ -130,7 +130,7 @@ csharp_style_prefer_utf8_string_literals = true:suggestion
 csharp_style_throw_expression = true:suggestion
 csharp_style_unused_value_assignment_preference = discard_variable:none
 csharp_style_unused_value_expression_statement_preference = discard_variable:none
-dotnet_diagnostic.IDE0058.severity = none
+dotnet_diagnostic.ide0058.severity = none
 
 # 'using' directive preferences
 csharp_using_directive_placement = outside_namespace:silent
@@ -253,6 +253,8 @@ resharper_indent_nested_while_stmt = true
 resharper_indent_preprocessor_region = no_indent
 resharper_indent_raw_literal_string = do_not_change
 resharper_outdent_statement_labels = true
+resharper_qualified_using_at_nested_scope = true
+resharper_enforce_using_statement_braces_highlighting = Disabled
 
 [*.{cs,vb}]
 dotnet_style_operator_placement_when_wrapping = beginning_of_line

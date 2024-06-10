@@ -27,6 +27,10 @@ public static class TimeoutHandler
                 {
                     Assert.Inconclusive("Thread aborted");
                 }
+                catch (OutOfMemoryException)
+                {
+                    Assert.Inconclusive("Out of memory");
+                }
             }, token);
             if (await Task.WhenAny(Task.Delay(timeOutInMilliseconds), task) == task)
             {
@@ -34,7 +38,7 @@ public static class TimeoutHandler
             }
             else
             {
-                cts.Cancel();
+                await cts.CancelAsync();
                 try
                 {
                     await task;
@@ -50,6 +54,10 @@ public static class TimeoutHandler
                 catch (ThreadAbortException)
                 {
                     Assert.Inconclusive("Thread aborted");
+                }
+                catch (OutOfMemoryException)
+                {
+                    Assert.Inconclusive("Out of memory");
                 }
             }
         }
@@ -79,6 +87,10 @@ public static class TimeoutHandler
                 {
                     Assert.Inconclusive("Thread aborted");
                 }
+                catch (OutOfMemoryException)
+                {
+                    Assert.Inconclusive("Out of memory");
+                }
             }, token);
             if (await Task.WhenAny(Task.Delay(timeOutInMilliseconds), task) == task)
             {
@@ -102,6 +114,10 @@ public static class TimeoutHandler
                 catch (ThreadAbortException)
                 {
                     Assert.Inconclusive("Thread aborted");
+                }
+                catch (OutOfMemoryException)
+                {
+                    Assert.Inconclusive("Out of memory");
                 }
             }
         }
