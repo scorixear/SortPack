@@ -14,19 +14,19 @@ public class HeapSort : RecursiveSortAlgorithm
     {
     }
 
-    public override IList<T> SortInPlace<T>(IList<T> collection)
+    public override IList<T> SortInPlace<T>(IList<T> collection, CancellationToken? cancellationToken = null)
     {
         int length = collection.Count;
 
         for (int i = (length / 2) - 1; i >= 0; i--)
         {
-            IncrementalHeapify(collection, length, i);
+            IncrementalHeapify(collection, length, i, cancellationToken ?? CancellationToken.None);
         }
 
         for (int i = length - 1; i > 0; i--)
         {
             Swap(collection, 0, i);
-            IncrementalHeapify(collection, i, 0);
+            IncrementalHeapify(collection, i, 0, cancellationToken ?? CancellationToken.None);
         }
 
         return collection;
@@ -76,11 +76,12 @@ public class HeapSort : RecursiveSortAlgorithm
         }
     }
 
-    private void IncrementalHeapify<T>(IList<T> collection, int length, int i) where T : IComparable<T>
+    private void IncrementalHeapify<T>(IList<T> collection, int length, int i, CancellationToken cancellationToken) where T : IComparable<T>
     {
         // Heapify with no recursion
         while (true)
         {
+            cancellationToken.ThrowIfCancellationRequested();
             int largest = i;
             int left = (2 * i) + 1;
             int right = (2 * i) + 2;

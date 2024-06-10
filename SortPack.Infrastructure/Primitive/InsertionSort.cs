@@ -8,10 +8,11 @@ public class InsertionSort : SortAlgorithm
     public InsertionSort() { }
     public InsertionSort(IStatisticCounter statisticCounter) : base(statisticCounter) { }
 
-    public override IList<T> SortInPlace<T>(IList<T> collection)
+    public override IList<T> SortInPlace<T>(IList<T> collection, CancellationToken? cancellationToken = null)
     {
         for (int i = 1; i < collection.Count; i++)
         {
+            cancellationToken?.ThrowIfCancellationRequested();
             T key = collection[i];
             StatisticCounter?.IncrementReadOperations();
             int j = i - 1;

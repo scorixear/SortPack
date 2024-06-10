@@ -33,7 +33,7 @@ public abstract class RecursiveSortAlgorithmTestBaseNoSetup<T> : SortAlgorithmTe
 
             await TimeoutHandler.HandleActionWithCancellationToken(3000, (cancellationToken) =>
             {
-                Sut.RecursiveSortInPlace(shuffled, cancellationToken);
+                Sut!.RecursiveSortInPlace(shuffled, cancellationToken);
             });
 
             foreach ((int actual, int expect) in shuffled.Zip(expected))

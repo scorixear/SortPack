@@ -13,7 +13,7 @@ public class BubbleSort : SortAlgorithm
     {
     }
 
-    public override IList<T> SortInPlace<T>(IList<T> collection)
+    public override IList<T> SortInPlace<T>(IList<T> collection, CancellationToken? cancellationToken = null)
     {
         if (collection.Count < 2)
         {
@@ -24,6 +24,7 @@ public class BubbleSort : SortAlgorithm
         bool swapped;
         do
         {
+            cancellationToken?.ThrowIfCancellationRequested();
             swapped = false;
             T prev = collection[0];
             StatisticCounter?.IncrementReadOperations();

@@ -13,7 +13,7 @@ public class CountingSort : NumberSortAlgorithm
     {
     }
 
-    public override IList<T> SortInPlace<T>(IList<T> collection)
+    public override IList<T> SortInPlace<T>(IList<T> collection, CancellationToken? cancellationToken = null)
     {
         if (collection.Count < 2)
         {
@@ -25,6 +25,7 @@ public class CountingSort : NumberSortAlgorithm
         StatisticCounter?.IncrementReadOperations();
         for (int i = 1; i < collection.Count; i++)
         {
+            cancellationToken?.ThrowIfCancellationRequested();
             T value = collection[i];
             if (Comparer<T>.Default.Compare(value, max) > 0)
             {
@@ -42,17 +43,20 @@ public class CountingSort : NumberSortAlgorithm
         int[] count = new int[range];
         foreach (T value in collection)
         {
+            cancellationToken?.ThrowIfCancellationRequested();
             count[Convert.ToUInt64(value - min)]++;
         }
         StatisticCounter?.IncrementReadOperations((ulong)collection.Count);
 
         for (int i = 1; i < count.Length; i++)
         {
+            cancellationToken?.ThrowIfCancellationRequested();
             count[i] += count[i - 1];
         }
         T[] result = new T[collection.Count];
         for (int i = collection.Count - 1; i >= 0; i--)
         {
+            cancellationToken?.ThrowIfCancellationRequested();
             T value = collection[i];
             result[--count[Convert.ToUInt64(value - min)]] = value;
         }

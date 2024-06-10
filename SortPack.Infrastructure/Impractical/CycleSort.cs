@@ -11,11 +11,12 @@ public class CycleSort : SortAlgorithm
     public CycleSort(IStatisticCounter statisticCounter) : base(statisticCounter)
     {
     }
-    public override IList<T> SortInPlace<T>(IList<T> collection)
+    public override IList<T> SortInPlace<T>(IList<T> collection, CancellationToken? cancellationToken = null)
     {
         int n = collection.Count;
         for (int cycleStart = 0; cycleStart < n - 1; cycleStart++)
         {
+            cancellationToken?.ThrowIfCancellationRequested();
             T item = collection[cycleStart];
             StatisticCounter?.IncrementReadOperations();
             int pos = cycleStart;
@@ -48,6 +49,7 @@ public class CycleSort : SortAlgorithm
 
             while (pos != cycleStart)
             {
+                cancellationToken?.ThrowIfCancellationRequested();
                 pos = cycleStart;
                 for (int i = cycleStart + 1; i < n; i++)
                 {

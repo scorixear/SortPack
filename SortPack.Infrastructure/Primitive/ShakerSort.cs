@@ -15,7 +15,7 @@ public class ShakerSort : SortAlgorithm
 
     }
 
-    public override IList<T> SortInPlace<T>(IList<T> collection)
+    public override IList<T> SortInPlace<T>(IList<T> collection, CancellationToken? cancellationToken = null)
     {
         if (collection.Count < 2)
         {
@@ -26,6 +26,7 @@ public class ShakerSort : SortAlgorithm
         int end = collection.Count;
         while (swapped)
         {
+            cancellationToken?.ThrowIfCancellationRequested();
             swapped = false;
             T prev = collection[start];
             StatisticCounter?.IncrementReadOperations();

@@ -15,24 +15,24 @@ public abstract class SortAlgorithm : ISortAlgorithm
     }
 
 
-    public abstract IList<T> SortInPlace<T>(IList<T> collection) where T : IComparable<T>;
+    public abstract IList<T> SortInPlace<T>(IList<T> collection, CancellationToken? cancellationToken = null) where T : IComparable<T>;
 
-    public Task<IList<T>> SortInPlaceAsync<T>(IList<T> collection) where T : IComparable<T>
+    public Task<IList<T>> SortInPlaceAsync<T>(IList<T> collection, CancellationToken? cancellationToken = null) where T : IComparable<T>
     {
-        return Task.Run(() => SortInPlace(collection));
+        return Task.Run(() => SortInPlace(collection, cancellationToken), cancellationToken ?? CancellationToken.None);
     }
 
 
 
-    public IList<T> Sort<T>(IList<T> collection) where T : IComparable<T>
+    public IList<T> Sort<T>(IList<T> collection, CancellationToken? cancellationToken = null) where T : IComparable<T>
     {
         IList<T> result = [.. collection];
-        return SortInPlace(result);
+        return SortInPlace(result, cancellationToken);
     }
 
-    public Task<IList<T>> SortAsync<T>(IList<T> collection) where T : IComparable<T>
+    public Task<IList<T>> SortAsync<T>(IList<T> collection, CancellationToken? cancellationToken = null) where T : IComparable<T>
     {
-        return Task.Run(() => Sort(collection));
+        return Task.Run(() => Sort(collection, cancellationToken), cancellationToken ?? CancellationToken.None);
     }
 
     protected void Swap<T>(IList<T> collection, int i, int j) where T : IComparable<T>

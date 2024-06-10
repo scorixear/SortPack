@@ -16,7 +16,7 @@ public sealed class RadixMSDSort : RecursiveStringAndNumberSortAlgorithm
     {
     }
 
-    public override IList<T> SortInPlace<T>(IList<T> collection)
+    public override IList<T> SortInPlace<T>(IList<T> collection, CancellationToken? cancellationToken = null)
     {
         if (collection.Count == 0)
         {
@@ -30,6 +30,7 @@ public sealed class RadixMSDSort : RecursiveStringAndNumberSortAlgorithm
 
         while (callQueue.Count > 0)
         {
+            cancellationToken?.ThrowIfCancellationRequested();
             (int start, int end, int byteIndex) = callQueue.Dequeue();
             if (start >= end || byteIndex < 0)
             {
@@ -44,6 +45,7 @@ public sealed class RadixMSDSort : RecursiveStringAndNumberSortAlgorithm
 
             for (int i = start; i < end; i++)
             {
+                cancellationToken?.ThrowIfCancellationRequested();
                 T value = collection[i];
                 byte bucketIndex = GetByteValue(value, byteIndex);
                 buckets[bucketIndex].Add(value);
@@ -53,6 +55,7 @@ public sealed class RadixMSDSort : RecursiveStringAndNumberSortAlgorithm
             int index = start;
             foreach (List<T> bucket in buckets)
             {
+                cancellationToken?.ThrowIfCancellationRequested();
                 if (bucket.Count <= 0)
                 {
                     continue;
@@ -70,7 +73,7 @@ public sealed class RadixMSDSort : RecursiveStringAndNumberSortAlgorithm
         return collection;
     }
 
-    public override IList<string> SortInPlace(IList<string> collection)
+    public override IList<string> SortInPlace(IList<string> collection, CancellationToken? cancellationToken = null)
     {
         if (collection.Count == 0)
         {
@@ -82,6 +85,7 @@ public sealed class RadixMSDSort : RecursiveStringAndNumberSortAlgorithm
 
         while (callQueue.Count > 0)
         {
+            cancellationToken?.ThrowIfCancellationRequested();
             (int start, int end, int charIndex) = callQueue.Dequeue();
             if (start >= end || charIndex < 0)
             {
@@ -96,6 +100,7 @@ public sealed class RadixMSDSort : RecursiveStringAndNumberSortAlgorithm
 
             for (int i = start; i < end; i++)
             {
+                cancellationToken?.ThrowIfCancellationRequested();
                 string value = collection[i];
                 int bucketIndex = GetCharIndex(value, charIndex);
                 buckets[bucketIndex].Add(value);
@@ -105,6 +110,7 @@ public sealed class RadixMSDSort : RecursiveStringAndNumberSortAlgorithm
             int index = start;
             for (int i = 0; i < buckets.Length; i++)
             {
+                cancellationToken?.ThrowIfCancellationRequested();
                 if (buckets[i].Count <= 0)
                 {
                     continue;

@@ -21,9 +21,9 @@ public class QuickSortTest : RecursiveSortAlgorithmTestBase<QuickSort>
         AssertMultiple.Multiple(() =>
         {
             collection.Should().BeEquivalentTo(new List<int> { 1, 2, 3 });
-            StatisticCounter.ReadOperations.Should().Be(2);
-            StatisticCounter.WriteOperations.Should().Be(2);
-            StatisticCounter.CompareOperations.Should().Be(13);
+            StatisticCounter!.ReadOperations.Should().Be(2);
+            StatisticCounter!.WriteOperations.Should().Be(2);
+            StatisticCounter!.CompareOperations.Should().Be(13);
 
         });
     }
@@ -42,9 +42,9 @@ public class QuickSortTest : RecursiveSortAlgorithmTestBase<QuickSort>
         AssertMultiple.Multiple(() =>
         {
             collection.Should().BeEquivalentTo(new List<int> { 0, 1, 2, 3 });
-            StatisticCounter.ReadOperations.Should().Be(4);
-            StatisticCounter.WriteOperations.Should().Be(4);
-            StatisticCounter.CompareOperations.Should().Be(16);
+            StatisticCounter!.ReadOperations.Should().Be(4);
+            StatisticCounter!.WriteOperations.Should().Be(4);
+            StatisticCounter!.CompareOperations.Should().Be(16);
 
         });
     }
@@ -62,9 +62,9 @@ public class QuickSortTest : RecursiveSortAlgorithmTestBase<QuickSort>
         // Assert
         AssertMultiple.Multiple(() =>
         {
-            StatisticCounter.ReadOperations.Should().Be(0);
-            StatisticCounter.WriteOperations.Should().Be(0);
-            StatisticCounter.CompareOperations.Should().Be(0);
+            StatisticCounter!.ReadOperations.Should().Be(0);
+            StatisticCounter!.WriteOperations.Should().Be(0);
+            StatisticCounter!.CompareOperations.Should().Be(0);
         });
     }
 
@@ -82,9 +82,9 @@ public class QuickSortTest : RecursiveSortAlgorithmTestBase<QuickSort>
         AssertMultiple.Multiple(() =>
         {
             collection.Should().BeEquivalentTo(new List<int> { 1, 2, 3 });
-            StatisticCounter.ReadOperations.Should().Be(11);
-            StatisticCounter.WriteOperations.Should().Be(6);
-            StatisticCounter.CompareOperations.Should().Be(3);
+            StatisticCounter!.ReadOperations.Should().Be(11);
+            StatisticCounter!.WriteOperations.Should().Be(6);
+            StatisticCounter!.CompareOperations.Should().Be(3);
 
         });
     }
@@ -103,9 +103,9 @@ public class QuickSortTest : RecursiveSortAlgorithmTestBase<QuickSort>
         AssertMultiple.Multiple(() =>
         {
             collection.Should().BeEquivalentTo(new List<int> { 0, 1, 2, 3 });
-            StatisticCounter.ReadOperations.Should().Be(19);
-            StatisticCounter.WriteOperations.Should().Be(10);
-            StatisticCounter.CompareOperations.Should().Be(6);
+            StatisticCounter!.ReadOperations.Should().Be(19);
+            StatisticCounter!.WriteOperations.Should().Be(10);
+            StatisticCounter!.CompareOperations.Should().Be(6);
 
         });
     }
@@ -123,9 +123,9 @@ public class QuickSortTest : RecursiveSortAlgorithmTestBase<QuickSort>
         // Assert
         AssertMultiple.Multiple(() =>
         {
-            StatisticCounter.ReadOperations.Should().Be(0);
-            StatisticCounter.WriteOperations.Should().Be(0);
-            StatisticCounter.CompareOperations.Should().Be(0);
+            StatisticCounter!.ReadOperations.Should().Be(0);
+            StatisticCounter!.WriteOperations.Should().Be(0);
+            StatisticCounter!.CompareOperations.Should().Be(0);
         });
     }
 }

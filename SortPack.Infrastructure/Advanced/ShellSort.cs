@@ -16,7 +16,7 @@ public class ShellSort : SortAlgorithm
         _shrinkFactor = shrinkFactor;
     }
 
-    public override IList<T> SortInPlace<T>(IList<T> collection)
+    public override IList<T> SortInPlace<T>(IList<T> collection, CancellationToken? cancellationToken = null)
     {
         if (collection.Count < 2)
         {
@@ -31,6 +31,7 @@ public class ShellSort : SortAlgorithm
         }
         while (gap > 0)
         {
+            cancellationToken?.ThrowIfCancellationRequested();
             for (int i = gap; i < n; i++)
             {
                 T temp = collection[i];

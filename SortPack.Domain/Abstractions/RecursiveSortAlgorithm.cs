@@ -15,11 +15,11 @@ public abstract class RecursiveSortAlgorithm : SortAlgorithm, IRecursiveSortAlgo
     public abstract IList<T> RecursiveSortInPlace<T>(IList<T> collection, CancellationToken? cancellationToken = null) where T : IComparable<T>;
     public Task<IList<T>> RecursiveSortAsync<T>(IList<T> collection, CancellationToken? cancellationToken = null) where T : IComparable<T>
     {
-        return Task.Run(() => RecursiveSort(collection, cancellationToken));
+        return Task.Run(() => RecursiveSort(collection, cancellationToken), cancellationToken ?? CancellationToken.None);
     }
     public Task<IList<T>> RecursiveSortInPlaceAsync<T>(IList<T> collection, CancellationToken? cancellationToken = null) where T : IComparable<T>
     {
-        return Task.Run(() => RecursiveSortInPlace(collection, cancellationToken));
+        return Task.Run(() => RecursiveSortInPlace(collection, cancellationToken), cancellationToken ?? CancellationToken.None);
     }
 
 }

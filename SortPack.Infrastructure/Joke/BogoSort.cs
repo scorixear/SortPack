@@ -13,17 +13,17 @@ public class BogoSort : SortAlgorithm
     {
     }
 
-    public IList<T> Sort<T>(IList<T> collection, Random random) where T : IComparable<T>
+    public IList<T> Sort<T>(IList<T> collection, Random random, CancellationToken? cancellationToken = null) where T : IComparable<T>
     {
-        return SortInPlace(new List<T>(collection), random);
+        return SortInPlace(new List<T>(collection), random, cancellationToken);
     }
 
-    public Task<IList<T>> SortAsync<T>(IList<T> collection, Random random) where T : IComparable<T>
+    public Task<IList<T>> SortAsync<T>(IList<T> collection, Random random, CancellationToken? cancellationToken = null) where T : IComparable<T>
     {
-        return Task.Run(() => Sort(collection, random));
+        return Task.Run(() => Sort(collection, random, cancellationToken), cancellationToken ?? CancellationToken.None);
     }
 
-    public IList<T> SortInPlace<T>(IList<T> collection, Random random) where T : IComparable<T>
+    public IList<T> SortInPlace<T>(IList<T> collection, Random random, CancellationToken? cancellationToken = null) where T : IComparable<T>
     {
         if (collection.Count < 2)
         {
@@ -32,20 +32,21 @@ public class BogoSort : SortAlgorithm
 
         while (!IsSorted(collection))
         {
+            cancellationToken?.ThrowIfCancellationRequested();
             Shuffle(collection, random);
         }
 
         return collection;
     }
 
-    public Task<IList<T>> SortInPlaceAsync<T>(IList<T> collection, Random random) where T : IComparable<T>
+    public Task<IList<T>> SortInPlaceAsync<T>(IList<T> collection, Random random, CancellationToken? cancellationToken = null) where T : IComparable<T>
     {
-        return Task.Run(() => SortInPlace(collection, random));
+        return Task.Run(() => SortInPlace(collection, random, cancellationToken), cancellationToken ?? CancellationToken.None);
     }
 
-    public override IList<T> SortInPlace<T>(IList<T> collection)
+    public override IList<T> SortInPlace<T>(IList<T> collection, CancellationToken? cancellationToken = null)
     {
-        return SortInPlace(collection, new Random());
+        return SortInPlace(collection, new Random(), cancellationToken);
     }
 
     private bool IsSorted<T>(IList<T> collection) where T : IComparable<T>

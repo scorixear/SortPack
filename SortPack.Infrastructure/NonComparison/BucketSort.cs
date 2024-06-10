@@ -17,7 +17,7 @@ public class BucketSort<TS> : NumberSortAlgorithm where TS : SortAlgorithm
         _sortAlgorithm = (TS)Activator.CreateInstance(typeof(TS), new object[] { statisticCounter })!;
     }
 
-    public IList<T> Sort<T>(IList<T> collection, int bucketSize) where T : IComparable<T>, IDivisionOperators<T, T, T>, IAdditionOperators<T, T, T>
+    public IList<T> Sort<T>(IList<T> collection, int bucketSize, CancellationToken? cancellationToken = null) where T : IComparable<T>, IDivisionOperators<T, T, T>, IAdditionOperators<T, T, T>
     {
         if (typeof(T) != typeof(byte)
             && typeof(T) != typeof(sbyte)
@@ -30,25 +30,25 @@ public class BucketSort<TS> : NumberSortAlgorithm where TS : SortAlgorithm
         }
 
         List<T> result = [.. collection];
-        return SortInPlace(result, bucketSize);
+        return SortInPlace(result, bucketSize, cancellationToken);
     }
 
-    public Task<IList<T>> SortAsync<T>(IList<T> collection, int bucketSize) where T : IComparable<T>, IDivisionOperators<T, T, T>, IAdditionOperators<T, T, T>
+    public Task<IList<T>> SortAsync<T>(IList<T> collection, int bucketSize, CancellationToken? cancellationToken = null) where T : IComparable<T>, IDivisionOperators<T, T, T>, IAdditionOperators<T, T, T>
     {
-        return Task.Run(() => Sort(collection, bucketSize));
+        return Task.Run(() => Sort(collection, bucketSize, cancellationToken), cancellationToken ?? CancellationToken.None);
     }
 
-    public Task<IList<T>> SortInPlaceAsync<T>(IList<T> collection, int bucketSize) where T : IComparable<T>, IDivisionOperators<T, T, T>, IAdditionOperators<T, T, T>
+    public Task<IList<T>> SortInPlaceAsync<T>(IList<T> collection, int bucketSize, CancellationToken? cancellationToken = null) where T : IComparable<T>, IDivisionOperators<T, T, T>, IAdditionOperators<T, T, T>
     {
-        return Task.Run(() => SortInPlace(collection, bucketSize));
+        return Task.Run(() => SortInPlace(collection, bucketSize, cancellationToken), cancellationToken ?? CancellationToken.None);
     }
 
-    public override IList<T> SortInPlace<T>(IList<T> collection)
+    public override IList<T> SortInPlace<T>(IList<T> collection, CancellationToken? cancellationToken = null)
     {
-        return SortInPlace(collection, 10);
+        return SortInPlace(collection, 10, cancellationToken);
     }
 
-    public IList<T> SortInPlace<T>(IList<T> collection, int bucketSize) where T : IComparable<T>, IDivisionOperators<T, T, T>, IAdditionOperators<T, T, T>
+    public IList<T> SortInPlace<T>(IList<T> collection, int bucketSize, CancellationToken? cancellationToken = null) where T : IComparable<T>, IDivisionOperators<T, T, T>, IAdditionOperators<T, T, T>
     {
         if (collection.Count < 2)
         {
@@ -58,6 +58,7 @@ public class BucketSort<TS> : NumberSortAlgorithm where TS : SortAlgorithm
         T maxValue = collection[0];
         foreach (T value in collection)
         {
+            cancellationToken?.ThrowIfCancellationRequested();
             if (Comparer<T>.Default.Compare(value, maxValue) > 0)
             {
                 maxValue = value;
@@ -82,6 +83,7 @@ public class BucketSort<TS> : NumberSortAlgorithm where TS : SortAlgorithm
 
         foreach (T value in collection)
         {
+            cancellationToken?.ThrowIfCancellationRequested();
             int bucketIndex = (int)Convert.ChangeType(value / x, typeof(int));
             buckets[bucketIndex].Add(value);
         }
@@ -89,7 +91,7 @@ public class BucketSort<TS> : NumberSortAlgorithm where TS : SortAlgorithm
 
         foreach (List<T> bucket in buckets)
         {
-            _sortAlgorithm.SortInPlace(bucket);
+            _sortAlgorithm.SortInPlace(bucket, cancellationToken);
         }
 
         StatisticCounter?.IncrementReadOperations(_sortAlgorithm.StatisticCounter?.ReadOperations ?? 0);
@@ -99,6 +101,7 @@ public class BucketSort<TS> : NumberSortAlgorithm where TS : SortAlgorithm
         int index = 0;
         foreach (List<T> bucket in buckets)
         {
+            cancellationToken?.ThrowIfCancellationRequested();
             foreach (T value in bucket)
             {
                 collection[index++] = value;

@@ -13,18 +13,18 @@ public class QuickSort : RecursiveSortAlgorithm
     public QuickSort(IStatisticCounter statisticCounter) : base(statisticCounter)
     {
     }
-    public IList<T> Sort<T>(IList<T> collection, Random random) where T : IComparable<T>
+    public IList<T> Sort<T>(IList<T> collection, Random random, CancellationToken? cancellationToken = null) where T : IComparable<T>
     {
         List<T> result = [.. collection];
-        return SortInPlace(result, random); ;
+        return SortInPlace(result, random, cancellationToken);
     }
 
-    public override IList<T> SortInPlace<T>(IList<T> collection)
+    public override IList<T> SortInPlace<T>(IList<T> collection, CancellationToken? cancellationToken = null)
     {
-        return SortInPlace(collection, new Random());
+        return SortInPlace(collection, new Random(), cancellationToken);
     }
 
-    public IList<T> SortInPlace<T>(IList<T> collection, Random random) where T : IComparable<T>
+    public IList<T> SortInPlace<T>(IList<T> collection, Random random, CancellationToken? cancellationToken = null) where T : IComparable<T>
     {
         if (collection.Count < 2)
         {
@@ -36,6 +36,7 @@ public class QuickSort : RecursiveSortAlgorithm
         Stack<int> stack = new();
         while (true)
         {
+            cancellationToken?.ThrowIfCancellationRequested();
             while (left < right)
             {
                 T pivot = collection[random.Next(left, right)];
@@ -44,6 +45,7 @@ public class QuickSort : RecursiveSortAlgorithm
                 int mid = left;
                 while (true)
                 {
+                    cancellationToken?.ThrowIfCancellationRequested();
                     while (LessThan(collection[mid], pivot))
                     {
                         mid++;

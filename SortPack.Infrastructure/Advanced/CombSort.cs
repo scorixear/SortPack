@@ -16,7 +16,7 @@ public class CombSort : SortAlgorithm
         _shrinkFactor = shrinkFactor;
     }
 
-    public override IList<T> SortInPlace<T>(IList<T> collection)
+    public override IList<T> SortInPlace<T>(IList<T> collection, CancellationToken? cancellationToken = null)
     {
         int length = collection.Count;
         int gap = length;
@@ -24,6 +24,7 @@ public class CombSort : SortAlgorithm
 
         while (gap != 1 || swapped)
         {
+            cancellationToken?.ThrowIfCancellationRequested();
             gap = GetNextGap(gap);
             swapped = false;
 

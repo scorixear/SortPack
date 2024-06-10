@@ -33,9 +33,9 @@ public abstract class NumberSortAlgorithmTestBaseNoSetup<T> where T : INumberSor
             ulong[] shuffled = [.. expected];
             Random.Shared.Shuffle(shuffled);
 
-            await TimeoutHandler.HandleActionWithoutCancellationToken(3000, () =>
+            await TimeoutHandler.HandleActionWithCancellationToken(3000, (token) =>
             {
-                Sut?.SortInPlace(shuffled);
+                Sut?.SortInPlace(shuffled, token);
             });
 
             foreach ((ulong actual, ulong expect) in shuffled.Zip(expected))

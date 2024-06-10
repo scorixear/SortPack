@@ -32,9 +32,9 @@ public abstract class SortAlgorithmTestBaseNoSetup<T> where T : ISortAlgorithm
             int[] shuffled = [.. expected];
             Random.Shared.Shuffle(shuffled);
 
-            await TimeoutHandler.HandleActionWithoutCancellationToken(3000, () =>
+            await TimeoutHandler.HandleActionWithCancellationToken(3000, (token) =>
             {
-                Sut?.SortInPlace(shuffled);
+                Sut?.SortInPlace(shuffled, token);
             });
 
             foreach ((int actual, int expect) in shuffled.Zip(expected))

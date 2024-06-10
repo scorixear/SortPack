@@ -8,12 +8,13 @@ public class DoubleSelectionSort : SortAlgorithm
     public DoubleSelectionSort() { }
     public DoubleSelectionSort(IStatisticCounter statisticCounter) : base(statisticCounter) { }
 
-    public override IList<T> SortInPlace<T>(IList<T> collection)
+    public override IList<T> SortInPlace<T>(IList<T> collection, CancellationToken? cancellationToken = null)
     {
         int length = collection.Count;
 
         for (int left = 0; left < length / 2; left++)
         {
+            cancellationToken?.ThrowIfCancellationRequested();
             int minIndex = left;
             T minValue = collection[left];
 

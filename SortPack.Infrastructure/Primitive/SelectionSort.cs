@@ -13,10 +13,11 @@ public class SelectionSort : SortAlgorithm
     {
     }
 
-    public override IList<T> SortInPlace<T>(IList<T> collection)
+    public override IList<T> SortInPlace<T>(IList<T> collection, CancellationToken? cancellationToken = null)
     {
         for (int i = 0; i < collection.Count - 1; i++)
         {
+            cancellationToken?.ThrowIfCancellationRequested();
             int minIndex = i;
             T key = collection[minIndex];
             StatisticCounter?.IncrementReadOperations();

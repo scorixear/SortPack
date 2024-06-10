@@ -22,21 +22,21 @@ public abstract class RecursiveStringAndNumberSortAlgorithm : RecursiveNumberSor
         return Task.Run(() => RecursiveSortInPlace(collection, cancellationToken));
     }
 
-    public IList<string> Sort(IList<string> collection)
+    public IList<string> Sort(IList<string> collection, CancellationToken? cancellationToken = null)
     {
         List<string> result = [.. collection];
-        return SortInPlace(result);
+        return SortInPlace(result, cancellationToken);
     }
 
-    public Task<IList<string>> SortAsync(IList<string> collection)
+    public Task<IList<string>> SortAsync(IList<string> collection, CancellationToken? cancellationToken = null)
     {
-        return Task.Run(() => Sort(collection));
+        return Task.Run(() => Sort(collection, cancellationToken), cancellationToken ?? CancellationToken.None);
     }
 
-    public abstract IList<string> SortInPlace(IList<string> collection);
+    public abstract IList<string> SortInPlace(IList<string> collection, CancellationToken? cancellationToken = null);
 
-    public Task<IList<string>> SortInPlaceAsync(IList<string> collection)
+    public Task<IList<string>> SortInPlaceAsync(IList<string> collection, CancellationToken? cancellationToken = null)
     {
-        return Task.Run(() => SortInPlace(collection));
+        return Task.Run(() => SortInPlace(collection, cancellationToken), cancellationToken ?? CancellationToken.None);
     }
 }

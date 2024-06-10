@@ -14,7 +14,7 @@ public class MergeSort : RecursiveSortAlgorithm
     {
     }
 
-    public override IList<T> SortInPlace<T>(IList<T> collection)
+    public override IList<T> SortInPlace<T>(IList<T> collection, CancellationToken? cancellationToken = null)
     {
         int length = collection.Count;
 
@@ -23,6 +23,7 @@ public class MergeSort : RecursiveSortAlgorithm
         {
             for (int leftStart = 0; leftStart < length - 1; leftStart += 2 * currSize)
             {
+                cancellationToken?.ThrowIfCancellationRequested();
                 int mid = Math.Min(leftStart + currSize - 1, length - 1);
                 int rightEnd = Math.Min(leftStart + (2 * currSize) - 1, length - 1);
 
