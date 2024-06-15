@@ -69,7 +69,8 @@ public class Program
 | ✅          | CombSort   | $$n \log n$$ | $$n^{1.2}$$ | $$n^2$$ | $$1$$ | No |
 | ✅          | HeapSort   | $$n \log n$$ | $$n \log n$$ | $$n \log n$$ | $$1$$ | No |
 | ✅          | ShellSort  | $$n \log n$$ | $$n^{1.2}$$ | $$n^{1.5}$$ | $$1$$ | No |
-| ❌          | Sorting Network | $$n$$ | $$n$$ | $$n$$ | $$n$$ | Yes |
+| ✅          | Sorting Network | $$n$$ | $$n$$ | $$n$$ | $$n$$ | Yes |
+| ✅          | BitonicSort | $$ n \log^2 n$$ | $$n \log^2 n$$ | $$n \log^2 n$$ | $$n \log^2 n$$ | Yes |
 
 
 
@@ -108,7 +109,7 @@ public class Program
 | ❌          | SleepSort  | | $$n + r$$ | | $$n$$ | No |
 | ❌          | SlowSort   | $$n^{\Omega(\log n)}$$ | $$n^{\Omega(\log n)}$$ | $$n^{\Omega(\log n)}$$ | $$n$$ | No |
 | ❌          | StalinSort | | $$n$$ | | 1 | ??? |
-| ❌          | StoogeSort | $$n^2.71$$ | $$n^2.71$$ | $$n^2.71$$ | $$\log n$$ | Yes |
+| ❌          | StoogeSort | $$n^{2.71}$$ | $$n^{2.71}$$ | $$n^{2.71}$$ | $$\log n$$ | Yes |
 
 ### Hybrid
 | Implemented | Algorithm  | Best  | Average | Worst   | Memory avg. | Stable |
