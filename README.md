@@ -88,7 +88,7 @@ public class Program
 | ✅          | CycleSort  | $$n^2$$ | $$n^2$$ | $$n^2$$ | $$1$$ | No | 
 | ✅          | GravitySort | | $$n \cdot r$$ | | $$n \cdot r$$ | No |
 | ❌          | CircleSort  | $$n \log n$$ | $$n (\log n)^2$$ | $$n (\log n)^2$$ | $$\log n$$ | No |
-| ❌          | ExchangeSort | $$n^2$$ | $$n^2$$ | $$n^2$$ | $$1$$ | No |
+| ✅          | ExchangeSort | $$n^2$$ | $$n^2$$ | $$n^2$$ | $$1$$ | No |
 | ❌          | GnomeSort  | $$n$$ | $$n^2$$ | $$n^2$$ | $$1$$ | Yes |
 | ❌          | LibrarySort | $$n \log n$$ | $$n \log n$$ | $$n^2$$ | $$n$$ | No |
 | ❌          | Merge-InsertionSort | $$n$$ | $$n^2$$ | $$n^2$$ | $$\log n$$ | No |
