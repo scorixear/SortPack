@@ -93,7 +93,7 @@ public class Program
 | ❌          | LibrarySort | $$n \log n$$ | $$n \log n$$ | $$n^2$$ | $$n$$ | No |
 | ❌          | Merge-InsertionSort | $$n$$ | $$n^2$$ | $$n^2$$ | $$\log n$$ | No |
 | ❌          | Odd-EvenSort | $$n$$ | $$n^2$$ | $$n^2$$ | $$1$$ | Yes |
-| ❌          | PatienceSort | $$n$$ | $$n \log n$$ | $$n \log n$$ | $$n$$ | No |
+| ✅          | PatienceSort | $$n$$ | $$n \log n$$ | $$n \log n$$ | $$n$$ | No |
 | ❌          | StrandSort | $$n$$ | $$n^1.5$$ | $$n^2$$ | $$n$$ | Yes |
 | ❌          | TournamentSort | $$n \log n$$ | $$n \log n$$ | $$n \log n$$ | $$n$$ | No |
 | ❌          | TreeSort   | $$n \log n$$ | $$n \log n$$ | $$n \log n$$ | $$n$$ | Yes |
