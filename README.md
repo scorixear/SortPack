@@ -70,7 +70,7 @@ public class Program
 | ✅          | HeapSort   | $$n \log n$$ | $$n \log n$$ | $$n \log n$$ | $$1$$ | No |
 | ✅          | ShellSort  | $$n \log n$$ | $$n^{1.2}$$ | $$n^{1.5}$$ | $$1$$ | No |
 | ✅          | Sorting Network | $$n$$ | $$n$$ | $$n$$ | $$n$$ | Yes |
-| ✅          | BitonicSort | $$ n \log^2 n$$ | $$n \log^2 n$$ | $$n \log^2 n$$ | $$n \log^2 n$$ | Yes |
+| ✅          | BitonicSort | $$n \log^2 n$$ | $$n \log^2 n$$ | $$n \log^2 n$$ | $$n \log^2 n$$ | Yes |
 
 
 
