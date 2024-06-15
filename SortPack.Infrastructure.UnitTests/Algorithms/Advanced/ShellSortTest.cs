@@ -22,15 +22,15 @@ public class ShellSortTest : SortAlgorithmTestBaseNoSetup<ShellSort>
         List<int> collection = [3, 2, 1];
 
         // Act
-        Sut!.SortInPlace(collection);
+        Sut.SortInPlace(collection);
 
         // Assert
         AssertMultiple.Multiple(() =>
         {
             collection.Should().BeEquivalentTo(new List<int> { 1, 2, 3 });
-            StatisticCounter!.ReadOperations.Should().Be(5);
-            StatisticCounter!.WriteOperations.Should().Be(3);
-            StatisticCounter!.CompareOperations.Should().Be(3);
+            StatisticCounter.ReadOperations.Should().Be(5);
+            StatisticCounter.WriteOperations.Should().Be(3);
+            StatisticCounter.CompareOperations.Should().Be(3);
         });
     }
 
@@ -41,15 +41,15 @@ public class ShellSortTest : SortAlgorithmTestBaseNoSetup<ShellSort>
         List<int> collection = [3, 2, 1, 0];
 
         // Act
-        Sut!.SortInPlace(collection);
+        Sut.SortInPlace(collection);
 
         // Assert
         AssertMultiple.Multiple(() =>
         {
             collection.Should().BeEquivalentTo(new List<int> { 0, 1, 2, 3 });
-            StatisticCounter!.ReadOperations.Should().Be(9);
-            StatisticCounter!.WriteOperations.Should().Be(6);
-            StatisticCounter!.CompareOperations.Should().Be(6);
+            StatisticCounter.ReadOperations.Should().Be(9);
+            StatisticCounter.WriteOperations.Should().Be(6);
+            StatisticCounter.CompareOperations.Should().Be(6);
         });
     }
 
@@ -60,14 +60,14 @@ public class ShellSortTest : SortAlgorithmTestBaseNoSetup<ShellSort>
         List<int> collection = [];
 
         // Act
-        Sut!.SortInPlace(collection);
+        Sut.SortInPlace(collection);
 
         // Assert
         AssertMultiple.Multiple(() =>
         {
-            StatisticCounter!.ReadOperations.Should().Be(0);
-            StatisticCounter!.WriteOperations.Should().Be(0);
-            StatisticCounter!.CompareOperations.Should().Be(0);
+            StatisticCounter.ReadOperations.Should().Be(0);
+            StatisticCounter.WriteOperations.Should().Be(0);
+            StatisticCounter.CompareOperations.Should().Be(0);
         });
     }
 }

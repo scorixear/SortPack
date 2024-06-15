@@ -6,8 +6,8 @@ namespace SortPack.Infrastructure.UnitTests;
 
 public abstract class SortAlgorithmTestBaseNoSetup<T> where T : ISortAlgorithm
 {
-    protected T? Sut { get; set; }
-    protected IStatisticCounter? StatisticCounter { get; set; }
+    protected T Sut { get; set; } = default!;
+    protected IStatisticCounter StatisticCounter { get; set; } = null!;
     public abstract void SortInPlace_Uneven_WhenCalled_SortsCollection();
 
     public abstract void SortInPlace_Even_WhenCalled_SortsCollection();

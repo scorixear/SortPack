@@ -15,15 +15,15 @@ public class RadixMSDSortTest : RecursiveNumberSortAlgorithmTestBase<RadixMSDSor
         List<int> collection = [3, 2, 1];
 
         // Act
-        Sut!.SortInPlace(collection);
+        Sut.SortInPlace(collection);
 
         // Assert
         AssertMultiple.Multiple(() =>
         {
             collection.Should().BeEquivalentTo(new List<int> { 1, 2, 3 });
-            StatisticCounter!.ReadOperations.Should().Be(12);
-            StatisticCounter!.WriteOperations.Should().Be(12);
-            StatisticCounter!.CompareOperations.Should().Be(0);
+            StatisticCounter.ReadOperations.Should().Be(12);
+            StatisticCounter.WriteOperations.Should().Be(12);
+            StatisticCounter.CompareOperations.Should().Be(0);
         });
     }
 
@@ -34,15 +34,15 @@ public class RadixMSDSortTest : RecursiveNumberSortAlgorithmTestBase<RadixMSDSor
         List<int> collection = [3, 2, 1, 0];
 
         // Act
-        Sut!.SortInPlace(collection);
+        Sut.SortInPlace(collection);
 
         // Assert
         AssertMultiple.Multiple(() =>
         {
             collection.Should().BeEquivalentTo(new List<int> { 0, 1, 2, 3 });
-            StatisticCounter!.ReadOperations.Should().Be(16);
-            StatisticCounter!.WriteOperations.Should().Be(16);
-            StatisticCounter!.CompareOperations.Should().Be(0);
+            StatisticCounter.ReadOperations.Should().Be(16);
+            StatisticCounter.WriteOperations.Should().Be(16);
+            StatisticCounter.CompareOperations.Should().Be(0);
         });
     }
 
@@ -53,14 +53,14 @@ public class RadixMSDSortTest : RecursiveNumberSortAlgorithmTestBase<RadixMSDSor
         List<int> collection = [];
 
         // Act
-        Sut!.SortInPlace(collection);
+        Sut.SortInPlace(collection);
 
         // Assert
         AssertMultiple.Multiple(() =>
         {
-            StatisticCounter!.ReadOperations.Should().Be(0);
-            StatisticCounter!.WriteOperations.Should().Be(0);
-            StatisticCounter!.CompareOperations.Should().Be(0);
+            StatisticCounter.ReadOperations.Should().Be(0);
+            StatisticCounter.WriteOperations.Should().Be(0);
+            StatisticCounter.CompareOperations.Should().Be(0);
         });
     }
 
@@ -71,15 +71,15 @@ public class RadixMSDSortTest : RecursiveNumberSortAlgorithmTestBase<RadixMSDSor
         List<int> collection = [3, 2, 1];
 
         // Act
-        Sut!.RecursiveSortInPlace(collection);
+        Sut.RecursiveSortInPlace(collection);
 
         // Assert
         AssertMultiple.Multiple(() =>
         {
             collection.Should().BeEquivalentTo(new List<int> { 1, 2, 3 });
-            StatisticCounter!.ReadOperations.Should().Be(12);
-            StatisticCounter!.WriteOperations.Should().Be(12);
-            StatisticCounter!.CompareOperations.Should().Be(0);
+            StatisticCounter.ReadOperations.Should().Be(12);
+            StatisticCounter.WriteOperations.Should().Be(12);
+            StatisticCounter.CompareOperations.Should().Be(0);
         });
     }
 
@@ -90,15 +90,15 @@ public class RadixMSDSortTest : RecursiveNumberSortAlgorithmTestBase<RadixMSDSor
         List<int> collection = [3, 2, 1, 0];
 
         // Act
-        Sut!.RecursiveSortInPlace(collection);
+        Sut.RecursiveSortInPlace(collection);
 
         // Assert
         AssertMultiple.Multiple(() =>
         {
             collection.Should().BeEquivalentTo(new List<int> { 0, 1, 2, 3 });
-            StatisticCounter!.ReadOperations.Should().Be(16);
-            StatisticCounter!.WriteOperations.Should().Be(16);
-            StatisticCounter!.CompareOperations.Should().Be(0);
+            StatisticCounter.ReadOperations.Should().Be(16);
+            StatisticCounter.WriteOperations.Should().Be(16);
+            StatisticCounter.CompareOperations.Should().Be(0);
         });
     }
 
@@ -109,14 +109,14 @@ public class RadixMSDSortTest : RecursiveNumberSortAlgorithmTestBase<RadixMSDSor
         List<int> collection = [];
 
         // Act
-        Sut!.SortInPlace(collection);
+        Sut.SortInPlace(collection);
 
         // Assert
         AssertMultiple.Multiple(() =>
         {
-            StatisticCounter!.ReadOperations.Should().Be(0);
-            StatisticCounter!.WriteOperations.Should().Be(0);
-            StatisticCounter!.CompareOperations.Should().Be(0);
+            StatisticCounter.ReadOperations.Should().Be(0);
+            StatisticCounter.WriteOperations.Should().Be(0);
+            StatisticCounter.CompareOperations.Should().Be(0);
         });
     }
 
@@ -127,15 +127,15 @@ public class RadixMSDSortTest : RecursiveNumberSortAlgorithmTestBase<RadixMSDSor
         List<string> collection = ["C", "B", "A"];
 
         // Act
-        Sut!.SortInPlace(collection);
+        Sut.SortInPlace(collection);
 
         // Assert
         AssertMultiple.Multiple(() =>
         {
             collection.Should().BeEquivalentTo(new List<string> { "A", "B", "C" });
-            StatisticCounter!.ReadOperations.Should().Be(6);
-            StatisticCounter!.WriteOperations.Should().Be(6);
-            StatisticCounter!.CompareOperations.Should().Be(0);
+            StatisticCounter.ReadOperations.Should().Be(6);
+            StatisticCounter.WriteOperations.Should().Be(6);
+            StatisticCounter.CompareOperations.Should().Be(0);
         });
     }
 
@@ -146,15 +146,15 @@ public class RadixMSDSortTest : RecursiveNumberSortAlgorithmTestBase<RadixMSDSor
         List<string> collection = ["D", "C", "B", "A"];
 
         // Act
-        Sut!.SortInPlace(collection);
+        Sut.SortInPlace(collection);
 
         // Assert
         AssertMultiple.Multiple(() =>
         {
             collection.Should().BeEquivalentTo(new List<string> { "A", "B", "C", "D" });
-            StatisticCounter!.ReadOperations.Should().Be(8);
-            StatisticCounter!.WriteOperations.Should().Be(8);
-            StatisticCounter!.CompareOperations.Should().Be(0);
+            StatisticCounter.ReadOperations.Should().Be(8);
+            StatisticCounter.WriteOperations.Should().Be(8);
+            StatisticCounter.CompareOperations.Should().Be(0);
         });
     }
 
@@ -165,14 +165,14 @@ public class RadixMSDSortTest : RecursiveNumberSortAlgorithmTestBase<RadixMSDSor
         List<string> collection = [];
 
         // Act
-        Sut!.SortInPlace(collection);
+        Sut.SortInPlace(collection);
 
         // Assert
         AssertMultiple.Multiple(() =>
         {
-            StatisticCounter!.ReadOperations.Should().Be(0);
-            StatisticCounter!.WriteOperations.Should().Be(0);
-            StatisticCounter!.CompareOperations.Should().Be(0);
+            StatisticCounter.ReadOperations.Should().Be(0);
+            StatisticCounter.WriteOperations.Should().Be(0);
+            StatisticCounter.CompareOperations.Should().Be(0);
         });
     }
 
@@ -183,15 +183,15 @@ public class RadixMSDSortTest : RecursiveNumberSortAlgorithmTestBase<RadixMSDSor
         List<string> collection = ["C", "B", "A"];
 
         // Act
-        Sut!.RecursiveSortInPlace(collection);
+        Sut.RecursiveSortInPlace(collection);
 
         // Assert
         AssertMultiple.Multiple(() =>
         {
             collection.Should().BeEquivalentTo(new List<string> { "A", "B", "C" });
-            StatisticCounter!.ReadOperations.Should().Be(6);
-            StatisticCounter!.WriteOperations.Should().Be(6);
-            StatisticCounter!.CompareOperations.Should().Be(0);
+            StatisticCounter.ReadOperations.Should().Be(6);
+            StatisticCounter.WriteOperations.Should().Be(6);
+            StatisticCounter.CompareOperations.Should().Be(0);
         });
     }
 
@@ -202,15 +202,15 @@ public class RadixMSDSortTest : RecursiveNumberSortAlgorithmTestBase<RadixMSDSor
         List<string> collection = ["D", "C", "B", "A"];
 
         // Act
-        Sut!.RecursiveSortInPlace(collection);
+        Sut.RecursiveSortInPlace(collection);
 
         // Assert
         AssertMultiple.Multiple(() =>
         {
             collection.Should().BeEquivalentTo(new List<string> { "A", "B", "C", "D" });
-            StatisticCounter!.ReadOperations.Should().Be(8);
-            StatisticCounter!.WriteOperations.Should().Be(8);
-            StatisticCounter!.CompareOperations.Should().Be(0);
+            StatisticCounter.ReadOperations.Should().Be(8);
+            StatisticCounter.WriteOperations.Should().Be(8);
+            StatisticCounter.CompareOperations.Should().Be(0);
         });
     }
 
@@ -221,14 +221,14 @@ public class RadixMSDSortTest : RecursiveNumberSortAlgorithmTestBase<RadixMSDSor
         List<string> collection = [];
 
         // Act
-        Sut!.SortInPlace(collection);
+        Sut.SortInPlace(collection);
 
         // Assert
         AssertMultiple.Multiple(() =>
         {
-            StatisticCounter!.ReadOperations.Should().Be(0);
-            StatisticCounter!.WriteOperations.Should().Be(0);
-            StatisticCounter!.CompareOperations.Should().Be(0);
+            StatisticCounter.ReadOperations.Should().Be(0);
+            StatisticCounter.WriteOperations.Should().Be(0);
+            StatisticCounter.CompareOperations.Should().Be(0);
         });
     }
 
@@ -250,7 +250,7 @@ public class RadixMSDSortTest : RecursiveNumberSortAlgorithmTestBase<RadixMSDSor
 
             await TimeoutHandler.HandleActionWithCancellationToken(3000, (cancellationToken) =>
             {
-                Sut!.RecursiveSortInPlace(shuffled, cancellationToken);
+                Sut.RecursiveSortInPlace(shuffled, cancellationToken);
             });
 
             foreach ((string actual, string expect) in shuffled.Zip(expected))
@@ -280,7 +280,7 @@ public class RadixMSDSortTest : RecursiveNumberSortAlgorithmTestBase<RadixMSDSor
 
             await TimeoutHandler.HandleActionWithCancellationToken(3000, (token) =>
             {
-                Sut!.SortInPlace(shuffled, token);
+                Sut.SortInPlace(shuffled, token);
             });
 
             foreach ((string actual, string expect) in shuffled.Zip(expected))
